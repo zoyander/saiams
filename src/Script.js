@@ -1,4 +1,5 @@
 import firebase from './firebase.js';
+import names from './Names.js';
 
 const Story = require('inkjs').Story;
 const json = require('./script.ink.json');
@@ -17,7 +18,7 @@ class Script {
 		let audience = null;
 		let choices = null;
         let news = null;
-		let world;
+		let world = null;
 		if (props) {
 			if (props.nextLines) nextLines = props.nextLines;
 			if (props.audience) audience = props.audience;
@@ -72,12 +73,12 @@ class Script {
 			}
 	}
 	getLineText(text) {
-		let newText = text.replace(/(Cass: |Iris: |News: |setWorldState: )/, '');
+		let newText = text.replace(/\w+: /, '');
 		return newText.trim();
 	}
 	getSpeaker(text) {
-		if (text.includes('Cass: ')) return "Cass";
-		if (text.includes('Iris: ')) return "Iris";
+		if (text.includes(names.callerA+': ')) return names.callerA;
+		if (text.includes(names.callerB+': ')) return names.callerB;
 		return null;
 	}
 	pickChoice(choice) {

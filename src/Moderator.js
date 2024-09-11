@@ -21,7 +21,7 @@ class Moderator extends React.Component {
 		let pickMe = 0;
 		const choices = Object.values(this.props.performance.choices);
 		choices.forEach((item, index) => {
-			if (item.votes > this.props.performance.choices[pickMe].vote > 0) {
+			if (item.votes > this.props.performance.choices[pickMe].votes) {
 				pickMe = index;
 			}
 		});

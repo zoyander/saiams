@@ -207,12 +207,6 @@ li.news::before{
 	margin-bottom: 0.5em;
 }
 
-ul.knot .Cass {
-	text-decoration: underline mediumslateblue;
-}
-ul.knot .Iris {
-	text-decoration: underline wavy teal;
-}
 ul.knot .News {
 	opacity: 0.3;
 }

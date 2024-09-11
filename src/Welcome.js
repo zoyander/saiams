@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button} from './Common.js'
+import names from './Names.js';
 
 class Welcome extends React.Component {
 	handleButton = (id) => {
@@ -10,7 +11,7 @@ class Welcome extends React.Component {
 		if (!this.props.performance) {
 			return (
 				<div>
-					<p tabIndex="0" role="alert">Welcome to Assigned Earth at Birth.</p>
+					<p tabIndex="0" role="alert">Welcome to {names.title}.</p>
 					<Button text="Start Performance" id="moderator" onClicked={this.handleButton} />
 				</div>
 			);
@@ -23,12 +24,12 @@ class Welcome extends React.Component {
 		} else {
 			return (
 				<div>
-					<p tabIndex="0" role="alert">Welcome to Assigned Earth at Birth. Please select your role from the following options:</p>
+					<p tabIndex="0" role="alert">Welcome to {names.title}. Please select your role from the following options:</p>
                     <div id="rolepicker">
 					    <Button text="Audience" id="audiencea" speaker="a" onClicked={this.handleButton} />
 					    <Button text="Moderator" id="moderator" onClicked={this.handleButton} />
-					    <Button text="Cass" id="callera" speaker="a" onClicked={this.handleButton} />
-					    <Button text="Iris" id="callerb" speaker="b" onClicked={this.handleButton} />
+					    <Button text={names.callerA} id="callera" speaker="a" onClicked={this.handleButton} />
+					    <Button text={names.callerB} id="callerb" speaker="b" onClicked={this.handleButton} />
                     </div>
 				</div>
 			);

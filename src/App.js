@@ -5,6 +5,7 @@ import Audience from './Audience.js';
 import VideoCaller from './VideoCaller.js';
 import Moderator from './Moderator.js';
 import Welcome from './Welcome.js';
+import names from './Names.js';
 
 const rantLength = 20;
 
@@ -84,16 +85,16 @@ class App extends React.Component {
 		let display;
 		switch(this.state.role) {
 			case "audiencea":
-				display = ( <Audience performance={this.state.performance} speaker='Cass' news={this.state.news} rant={this.state.rant}/> );
+				display = ( <Audience performance={this.state.performance} speaker={names.callerA} news={this.state.news} rant={this.state.rant}/> );
 				break;
 			case "audienceb":
-				display = ( <Audience performance={this.state.performance} speaker='Iris' news={this.state.news} rant={this.state.rant}/> );
+				display = ( <Audience performance={this.state.performance} speaker={names.callerB} news={this.state.news} rant={this.state.rant}/> );
 				break;
 			case "callera":
-				display = ( <VideoCaller performance={this.state.performance} speaker='Cass' rant={this.state.rant} />);
+				display = ( <VideoCaller performance={this.state.performance} speaker={names.callerA} rant={this.state.rant} />);
 				break;
 			case "callerb":
-				display = ( <VideoCaller performance={this.state.performance} speaker='Iris' /> );
+				display = ( <VideoCaller performance={this.state.performance} speaker={names.callerB} /> );
 				break;
 			case "moderator":
 				display = ( <Moderator performance={this.state.performance} onBackButton={this.handleBackButton} rant={this.state.rant} news={this.state.news} /> );

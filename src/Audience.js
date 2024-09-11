@@ -66,11 +66,6 @@ class Audience extends React.Component {
 				selected: null
 			}));
 		}
-		if (resetChoices) {
-			if (choices.length > 1) {
-				this.playSound("ping");
-			}
-		}
 	}
 	render() {
 		if (!this.props.performance) return null;
@@ -134,7 +129,7 @@ class Audience extends React.Component {
 		} else {
 			if (this.props.performance.audience) {
 				if (this.props.rant.length < 21){
-					this.playSound("ping");
+					//this.playSound("ping"); // not sure why this keeps pinging, fix later
 				};
 				let newText = this.props.performance.audience.replace('@', '');
 				return (
