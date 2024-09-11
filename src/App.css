@@ -1,0 +1,255 @@
+
+
+.App {
+	text-align: center;
+	background: black;
+	font-family: Courier;
+	color: white;
+	font-size: 1.3em;
+}
+
+.App-container {
+	min-height: 88vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 2em 1em;
+}
+
+.App-container > div {
+	width: 100%;
+	max-width: 100vh;
+}
+
+.App-container > div > *:last-child {
+	margin-bottom: 0;
+}
+
+.news {
+	position: absolute;
+	background: lavender;
+	background: linear-gradient(45deg, slategray, powderblue);
+	color: black;
+	font-family: Helvetica, Arial, sans-serif;
+	text-align: left;
+	font-size: 1em;
+	font-weight: 500;
+	top: 15px;
+	padding: 1em;
+	border-radius: 0 0 0 5px;
+	box-shadow: 3px 3px 3px black;
+	animation: slide-in-fade-out 20s linear;
+	animation-fill-mode: forwards;
+}
+
+li.news {
+    list-style-type: none;
+	padding-left: 2em;
+}
+
+li.news::before{
+	content: "newspaper";
+	font-family: 'Material Icons';
+	position: absolute;
+	left: 0.5em;
+}
+
+.App button {
+	font-family: Courier, 'Courier New', monospace;
+	font-size: 1em;
+	width: 100%;
+	margin-bottom: 0.5em;
+	border-radius: 5px;
+	/*animation: fade 30s linear;
+	animation-fill-mode: forwards;*/
+}
+
+.App button,
+.App form input[type=submit] {
+	background-color: pink;
+	background: linear-gradient(45deg, pink, powderblue);
+	border: 0;
+	color: darkslategray;
+	font-weight: bold;
+}
+
+.App button:active::after,
+.App button:disabled::after,
+.App form input[type=submit]:active::after {
+	content: "✅ selected";
+	position: absolute;
+	left: -2em;
+	margin-top: -1em;
+	transform: rotate(270deg);
+	font-size: small;
+	background: slateblue;
+	color: white;
+	padding: 10px;
+	border-radius: 5px;
+	width: 80px;
+}
+
+.App button:hover,
+.App form input[type=submit]:hover,
+.App button:active,
+.App button:disabled,
+.App form input[type=submit]:active {
+	background-color: powderblue;
+	background: linear-gradient(90deg,powderblue, pink);
+}
+
+.App button.highlight {
+	border: 5px palevioletred solid;
+}
+
+.App button.highlight::before {
+	content: "⭐ winning";
+	color: white;
+	position: absolute;
+	right: 4em;
+	margin-top: -3em;
+	font-size: small;	
+	background: palevioletred;
+	padding: 0.5em;
+	border-radius: 5px;
+}
+
+.App #mod button.highlight::before {
+	content: "";
+	background: none;
+}
+
+.App button:hover,
+.App form input[type=submit]:hover {
+	scale: 1.1;
+}
+
+.App div::not(#rolepicker)::not(#soundControl) button{
+	min-height: 100px;
+	padding: 1em;
+}
+
+#soundControl button {
+	position: absolute;
+	border: white ridge;
+	top: 0;
+	right: 10px;
+	width: 30%;
+	min-height: 30px;
+	padding: 0.5em;
+	padding: 0;
+	animation: none;
+	background: white;
+	z-index: 50;
+}
+
+#soundControl.unmute button {
+	font-size: 0.5em;
+	padding: 0;
+	padding-top: 20px;	
+}
+
+#mod button {
+	animation: none;
+}
+
+#rolepicker button{
+	background-color: darkslategray;
+	background: linear-gradient(45deg, slategray, white);
+	font-size: 0.5em;
+	width: 45%;
+	min-height: 60px;
+	padding: 0.5em;
+	margin: 0.5em;
+	animation: none;
+}
+
+#rolepicker button:nth-of-type(1) {
+	font-size: 1.2em;
+	background: linear-gradient(45deg, pink, powderblue);
+	width: 100%;
+	margin-bottom: 25vh;
+}
+
+.App form {
+	display: flex;
+}
+
+.App form input {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	padding: 1em;
+	margin-bottom: 1em;
+}
+
+.App form input[type=text] {
+	width: 100%;
+	flex-grow: 1;
+	border: 1px solid black;
+	background-color: white;
+	color: black;
+}
+
+.App ol {
+	text-align: left;
+}
+
+.App .bubble p {
+	margin: 2.5em;
+}
+
+.App .preview {
+	color: white;
+	font-size: 0.8em;
+	list-style-type: none;
+	text-align: left;
+	margin-bottom: 0.5em;
+}
+
+ul.knot .Cass {
+	text-decoration: underline mediumslateblue;
+}
+ul.knot .Iris {
+	text-decoration: underline wavy teal;
+}
+ul.knot .News {
+	opacity: 0.3;
+}
+
+.App .countdown {
+	height: 25px;
+	margin-bottom: 0.5em;
+	background: slategray;
+	animation: countdown 30s linear;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+}
+
+@media (min-width: 800px) {
+	.news {
+		font-size: 1em;
+	}
+
+	#soundControl button {
+		font-size: 0.5em;
+		padding: 0;
+		padding-top: 20px;
+	}
+}
+
+@keyframes countdown {
+	0% { left: 100%; width: 100%; }
+	100% { left: 0; width: 0 }
+}
+
+@keyframes fade {
+	0% { opacity: 1; }
+	100% { opacity: 0.3; }
+}
+
+@keyframes slide-in-fade-out {
+	0% { transform: translateY(-400px); opacity: 1;}
+	5% { transform: translateY(0); opacity: 1;}
+	100% { transform: translateY(0); opacity: 0; }
+}

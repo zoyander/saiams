@@ -1,0 +1,25 @@
+.Subtitles {
+	color: white;
+	font-family: Courier;
+	font-size: 1.5em;
+	z-index: 1000;
+}
+
+.Subtitles-container {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.Subtitles-container .Cass p {
+	background: darkslateblue;
+}
+
+.Subtitles-container .Iris p {
+	background: teal;
+}
+
+p {
+	background: black;
+	padding: 20px;
+}

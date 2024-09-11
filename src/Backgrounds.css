@@ -1,0 +1,45 @@
+.background-container {
+	max-width: 100vw;
+	max-height: 100vh;
+}
+
+.background-container div{
+	display: block;
+	position: absolute;
+	background-size: 100%;
+	height: 100vh;
+	width: 100vw;
+	z-index: 5000;
+}
+
+div.earth {
+	background-image: url("https://intrapology.com/backgrounds-aeab/Earth.jpg");
+}
+
+div.institute1 {
+	background-image: url("https://intrapology.com/backgrounds-aeab/Institute1.jpg");
+}
+
+div.institute2 {
+	background-image: url("https://intrapology.com/backgrounds-aeab/Institute2.jpg");
+}
+
+div.institute3 {
+	background-image: url("https://intrapology.com/backgrounds-aeab/Institute3.jpg");
+}
+
+div.institute4 {
+	background-image: url("https://intrapology.com/backgrounds-aeab/Institute4.jpg");
+}
+
+div.institute5 {
+	background-image: url("https://intrapology.com/backgrounds-aeab/Institute5.jpg");
+}
+
+div.institute6 {
+	background-image: url("https://intrapology.com/backgrounds-aeab/Institute6.jpg");
+}
+
+div.institute7 {
+	background-image: url("https://intrapology.com/backgrounds-aeab/Institute7.jpg");
+}
