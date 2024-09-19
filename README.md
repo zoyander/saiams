@@ -2,7 +2,7 @@
 
 # Initial Setup
 - Download the code in this project and put it somewhere sensible - it will become your project folder
-- Download and install Node.js and npm: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
+- Download and install Node.js: https://nodejs.org/en/download/prebuilt-installer
 - Create a new project in Firebase: https://console.firebase.google.com/
   - Under "Get started by adding Firebase to your app", click the Web button
   - In your project folder, under "src", find firebase-template.js, rename it to firebase.js, and copy the values that Firebase gives you into the appropriate spots where it says YOUR DATA HERE
