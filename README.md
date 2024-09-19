@@ -1,18 +1,26 @@
 # Intrapology
 
-# How to get started (or start again)
-- Depending on the situation, you might need to start by installing Create React App. Instructions for this can be found at https://create-react-app.dev
-- Copy all folders except for node_modules to the new location
-- In the new location, install the dependencies with the command npm install
-- Start the local server with the command npm start
+# Initial Setup
+- Download the code in this project and put it somewhere sensible - it will become your project folder.
+- Download and install Node.js and npm: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
+- Create a new project in Firebase: https://console.firebase.google.com/
+  - Under "Get started by adding Firebase to your app", click the Web button
+  - In your project folder, under "src", find firebase-template.js, rename it to firebase.js, and copy the values that Firebase gives you into the appropriate spots where it says YOUR DATA HERE
+  - Under the Build section/menu, click Realtime Database and set one up
+    - Create a new database entry with the name "password" and the value whatever you want the moderator password to be
+    - Under Rules, set read and write access to "true"
+- Open a Command Prompt (Windows) or Terminal (Mac/Linux) window, go to your project folder and type "npm install"
 
-# Set up the Firebase server
-- If you are starting a new server on Firebase for this, you need to get the right credentials for it by creating a new Web App in a Firebase project.
-- Update firebase.js with the credentials of the Firebase server (Realtime Database) you are using. These will be displayed during the new Web App setup process, or can be found in "APIs and services" on Google Cloud.
-- Keep the firebase server in "testing mode" and set read and write access to "true". Google hates this and you'll have to change it to something more secure at some point but I don't yet know anything about it.
-- Create a new data entry on the server with the name "password" and the value whatever you want the moderator password to be.
+# Run the code
+- In the Command Prompt/Terminal, go to your project folder and type "npm start"
 
-# Export a build for the website
-- You need to set a url that corresponds to the expected location of the webpage somewhere, I can't remember where.
-- Create a build with the command npm run build
-- Copy the contents of the build folder into the relevant location on the website.
+# Writing with Ink
+- Download Inky: https://www.inklestudios.com/ink/
+- Open script.ink to see some examples of what you can do
+- At the moment, you can have only two characters: in this example, they are called "Apple" and "Banana"
+  - To change the names of these characters, you will also need to change them in Names.js in the "src" folder
+- Export your work to JSON, name it "script.ink.json" and put it in the "src" folder
+
+# Export a build to host online
+- Create a build with the command "npm run build"
+- Copy the contents of the build folder into the relevant location on your website
