@@ -1,7 +1,7 @@
 # Intrapology
 
 # Initial Setup
-- Download the code in this project and put it somewhere sensible - it will become your project folder.
+- Download the code in this project and put it somewhere sensible - it will become your project folder
 - Download and install Node.js and npm: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 - Create a new project in Firebase: https://console.firebase.google.com/
   - Under "Get started by adding Firebase to your app", click the Web button
