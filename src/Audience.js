@@ -68,7 +68,16 @@ class Audience extends React.Component {
 		}
 	}
 	render() {
-		if (!this.props.performance) return null;
+		// This prevents React.js from crashing when there's a problem getting data from Firebase
+		// However, it still doesn't behave as expected - it just goes back to Welcome.js without crashing
+		// Ideally, in case of a Firebase problem we'd be able to show a specific message, like the one shown here.
+		if (!this.props.performance) {
+			return (
+				<div aria-live="off">
+					<p>Nothing to display to audience</p>
+				</div>
+			);
+		}
 
         let newsPopup;
         if (!this.props.news) {

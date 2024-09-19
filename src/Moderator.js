@@ -88,7 +88,7 @@ class Moderator extends React.Component {
 					<Button text="Whoops! Go back!" id="back" onClicked={this.handleBackButton} />
 				</div>
 			);
-		} else if (this.state.passwordCorrect) {
+		} else if (this.state.passwordCorrect && this.props.performance) {
 			let currentLine, currentChoices, continueButton, countdown, rant;
 			if (this.props.performance.currentLine !== "") {
 				if (this.props.performance.currentSpeaker) { 
