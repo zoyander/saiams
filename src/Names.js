@@ -1,7 +1,6 @@
 const names = {
 	title: "Hello World",
-	callerA: "Apple",
-	callerB: "Banana"
+	callers: [ "Apple", "Banana" ]
 };
 
 export default names;

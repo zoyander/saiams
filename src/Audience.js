@@ -103,7 +103,6 @@ class Audience extends React.Component {
 		if (allChoices) {
 			for (let i = 0; i < allChoices.length; i++) {
 				if (allChoices.length > 1) { // Use this to hide fake choices used to progress the story e.g. "news"
-				//if (allChoices[i].speaker === this.props.speaker) { // OR use this if there are multiple audience groups
 					if (allChoices[i].votes > allChoices[leading].votes) {
 						leading = i;
 					}

@@ -22,14 +22,16 @@ class Welcome extends React.Component {
 				</div>
 			);
 		} else {
+			const callerButtons = Object.keys(names.callers).map((i) =>
+				<Button text={names.callers[i]} id={names.callers[i]} onClicked={this.handleButton} />
+			);
 			return (
 				<div>
 					<p tabIndex="0" role="alert">Welcome to {names.title}. Please select your role from the following options:</p>
                     <div id="rolepicker">
-					    <Button text="Audience" id="audiencea" speaker="a" onClicked={this.handleButton} />
+					    <Button text="Audience" id="audience" onClicked={this.handleButton} />
+					    {callerButtons}
 					    <Button text="Moderator" id="moderator" onClicked={this.handleButton} />
-					    <Button text={names.callerA} id="callera" speaker="a" onClicked={this.handleButton} />
-					    <Button text={names.callerB} id="callerb" speaker="b" onClicked={this.handleButton} />
                     </div>
 				</div>
 			);

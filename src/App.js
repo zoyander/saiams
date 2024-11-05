@@ -5,7 +5,6 @@ import Audience from './Audience.js';
 import VideoCaller from './VideoCaller.js';
 import Moderator from './Moderator.js';
 import Welcome from './Welcome.js';
-import names from './Names.js';
 
 const rantLength = 20;
 
@@ -84,23 +83,17 @@ class App extends React.Component {
 
 		let display;
 		switch(this.state.role) {
-			case "audiencea":
-				display = ( <Audience performance={this.state.performance} speaker={names.callerA} news={this.state.news} rant={this.state.rant}/> );
-				break;
-			case "audienceb":
-				display = ( <Audience performance={this.state.performance} speaker={names.callerB} news={this.state.news} rant={this.state.rant}/> );
-				break;
-			case "callera":
-				display = ( <VideoCaller performance={this.state.performance} speaker={names.callerA} rant={this.state.rant} />);
-				break;
-			case "callerb":
-				display = ( <VideoCaller performance={this.state.performance} speaker={names.callerB} /> );
+			case "audience":
+				display = ( <Audience performance={this.state.performance} news={this.state.news} rant={this.state.rant}/> );
 				break;
 			case "moderator":
 				display = ( <Moderator performance={this.state.performance} onBackButton={this.handleBackButton} rant={this.state.rant} news={this.state.news} /> );
 				break;
-			default:
+			case null:
 				display = ( <Welcome performance={this.state.performance} onRoleSelected={this.handleRoleSelected} /> );
+				break;
+			default:
+				display = ( <VideoCaller performance={this.state.performance} speaker={this.state.role} rant={this.state.rant} />);
 		}
 		return (
 			<div className="App">
