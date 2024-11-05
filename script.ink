@@ -12,6 +12,8 @@ Banana: Hi, I'm the second video caller!
 
 ==MultipleChoice
 
+@What should be our next topic of discussion?
+
 Apple: Here is some multiple-choice voting!
 
 Banana: What should be our next topic of discussion?

@@ -110,38 +110,36 @@ class Audience extends React.Component {
 				}
 			}
 		}
-		if (choices.length > 0) {
-			const choiceList = Object.keys(choices).map((i) =>
-				<Button
-					key={i}
-					text={choices[i].text+" ("+choices[i].votes+" votes)"}
-					speaker={i == leading ? "highlight" : null}
-					id={i}
-					onClicked={this.handleChoice}
-					selected={this.state.selected === i} />
-			);
-			return (
-				<div>
-					<div id="soundControl" className={muteCommand} aria-live="off">
-						<Button 
-							key={muteCommand}
-							id={muteCommand}  
-							text={buttonMessage}
-							onClicked={this.handleMute} />
-					</div>
-					<ul role="status">{newsPopup}</ul>
-					<p tabIndex="0" role="alert">Please vote for one of the following:</p>
-					{choiceList}
-				</div>
-			);
-		} else {
-			if (this.props.performance.audience) {
-				if (this.props.rant.length < 21){
-					//this.playSound("ping"); // not sure why this keeps pinging, fix later
-				};
-				let newText = this.props.performance.audience.replace('@', '');
+		let newText = ""
+		if (this.props.performance.audience) {
+			newText = this.props.performance.audience.replace('@', '');
+			if (choices.length > 0) {
+				const choiceList = Object.keys(choices).map((i) =>
+					<Button
+						key={i}
+						text={choices[i].text+" ("+choices[i].votes+" votes)"}
+						speaker={i == leading ? "highlight" : null}
+						id={i}
+						onClicked={this.handleChoice}
+						selected={this.state.selected === i} />
+				);
 				return (
-                    <div>
+					<div>
+						<div id="soundControl" className={muteCommand} aria-live="off">
+							<Button 
+								key={muteCommand}
+								id={muteCommand}  
+								text={buttonMessage}
+								onClicked={this.handleMute} />
+						</div>
+						<ul role="status">{newsPopup}</ul>
+						<p tabIndex="0" role="alert">{newText.trim()}</p>
+						{choiceList}
+					</div>
+				);
+			} else {
+				return (
+					<div>
 						<div id="soundControl" className={muteCommand} aria-live="off">
 							<Button 
 								key={muteCommand}
@@ -150,29 +148,29 @@ class Audience extends React.Component {
 								onClicked={this.handleMute} />
 						</div>
 						<ul role="status">{newsPopup}</ul>
-					    <div className="bubble">
-						    <p tabIndex="0" role="alert" >Have your say! {newText.trim()}</p>
-                            <TextBox onSubmitted={this.handleFreeResponse}/>
-                        </div>
-                        <p aria-hidden="true">Current rant content</p>
-                        <ul aria-hidden="true">{this.props.rant}</ul>
-                    </div>
-				);
-			} else {
-				return (
-					<div aria-live="off">
-						<div id="soundControl" className={muteCommand} aria-live="off">
-							<Button 
-								key={muteCommand}
-								id={muteCommand}    
-								text={buttonMessage}
-								onClicked={this.handleMute} />
+						<div className="bubble">
+							<p tabIndex="0" role="alert" >Have your say! {newText.trim()}</p>
+							<TextBox onSubmitted={this.handleFreeResponse}/>
 						</div>
-            			<ul role="status">{newsPopup}</ul>
-						<p>You don't have to do anything right now - just sit back and enjoy the show!</p>
+						<p aria-hidden="true">Current rant content</p>
+						<ul aria-hidden="true">{this.props.rant}</ul>
 					</div>
 				);
 			}
+		} else {
+			return (
+				<div aria-live="off">
+					<div id="soundControl" className={muteCommand} aria-live="off">
+						<Button 
+							key={muteCommand}
+							id={muteCommand}    
+							text={buttonMessage}
+							onClicked={this.handleMute} />
+					</div>
+					<ul role="status">{newsPopup}</ul>
+					<p>You don't have to do anything right now - just sit back and enjoy the show!</p>
+				</div>
+			);
 		}
 	}
 }

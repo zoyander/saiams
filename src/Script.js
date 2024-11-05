@@ -77,8 +77,9 @@ class Script {
 		return newText.trim();
 	}
 	getSpeaker(text) {
-		if (text.includes(names.callerA+': ')) return names.callerA;
-		if (text.includes(names.callerB+': ')) return names.callerB;
+		for (const speaker of names.callers) {
+			if (text.includes(speaker+': ')) return speaker;
+		}
 		return null;
 	}
 	pickChoice(choice) {
