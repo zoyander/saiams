@@ -1,23 +1,21 @@
 import React from 'react';
 import firebase from './firebase.js';
 import script from './Script.js';
-import {Button, TextBox, Countdown} from './Common.js';
+import {Button, TextBox} from './Common.js';
 
 class Moderator extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			password: null,
 			passwordCorrect: false,
 			attemptedPassword: false,
 			areYouSure: false
 		};
 	}
 	handleContinueButton = (id) => {
-		script.continue(this.props.performance);
+		script.continue(this.props.settings.performanceId, this.props.performance);
 	}
 	handlePickButton = (id) => {
-		firebase.database().ref('rants').set(null);
 		let pickMe = 0;
 		const choices = Object.values(this.props.performance.choices);
 		choices.forEach((item, index) => {
@@ -25,29 +23,27 @@ class Moderator extends React.Component {
 				pickMe = index;
 			}
 		});
-		script.pickChoice(pickMe);
+		script.pickChoice(pickMe, this.props.settings.performanceId);
 	}
 	handleEndButton = (id) => {
 		if (this.state.areYouSure) {
-			firebase.database().ref('performance').set(null);
-			firebase.database().ref('rants').set(null);
-            firebase.database().ref('news').set(null);
+			firebase.database().ref(this.props.settings.performanceId).set(null);
 			this.props.onBackButton();
 		} else {
 			this.setState({areYouSure: true});
 		}
 	}
 	handleRantButton = (id) => {
-		firebase.database().ref('rants').set(null);
+		firebase.database().ref(this.props.settings.performanceId+'/rants').set(null);
 	}
 	handleRestartButton = (id) => {
-		firebase.database().ref('performance').set("restarting");
-		script.startOver();
+		firebase.database().ref(this.props.settings.performanceId).set("restarting");
+		script.startOver(this.props.settings.performanceId);
 	}
 	handlePassword = (value) => {
-		if (value === this.state.password) {
+		if (value === this.props.settings.modPassword) {
 			this.setState({passwordCorrect: true});
-			script.initPerformance(this.props.performance);
+			script.initPerformance(this.props.performance, this.props.settings.performanceId);
 		}
 		this.setState({attemptedPassword: true});
 	}
@@ -65,31 +61,26 @@ class Moderator extends React.Component {
 			return str;
 		}
 	}
-	componentDidMount() {
-		const pwRef = firebase.database().ref('password');
-		pwRef.on('value', (snapshot) => {
-			const newState = snapshot.val();
-			this.setState(state => ({
-				password: newState
-			}));
-		});
-	}
 	componentWillUnmount() {
 		this.setState = (state, callback) => {return;};
 	}
 	render() {
-        const r = this.props.rant;
-
+        let r = null;
+		if (this.props.performance.rants) {
+			r = Object.keys(this.props.performance.rants).map((i) =>
+				<li key={i}>{this.props.performance.rants[i]}</li>
+			);
+		}
 		if (this.state.areYouSure) {
 			return (
 				<div>
-					<p>This will end the entire performance! Are you sure you want to do that?</p>
-					<Button text="Yes, the show's over!" id="end" onClicked={this.handleEndButton} />
-					<Button text="Whoops! Go back!" id="back" onClicked={this.handleBackButton} />
+					<p>This will end the entire performance. Are you sure?</p>
+					<Button text="End performance" id="end" onClicked={this.handleEndButton} />
+					<Button text="Go back" id="back" onClicked={this.handleBackButton} />
 				</div>
 			);
 		} else if (this.state.passwordCorrect && this.props.performance) {
-			let currentLine, currentChoices, continueButton, countdown, rant;
+			let currentLine, currentChoices, continueButton;
 			if (this.props.performance.currentLine !== "") {
 				if (this.props.performance.currentSpeaker) { 
 					currentLine = (
@@ -112,11 +103,6 @@ class Moderator extends React.Component {
 				currentChoices = (
 					<ol>{choiceList}</ol>
 				);
-				if (choices[0].speaker === "a") { // I don't actually know if this still works
-					countdown = (
-						<Countdown />
-					);
-				}
 				if (!continueButton) {
 					continueButton = (
 						// This shows when the button will end voting and select a branch of the script
@@ -131,27 +117,26 @@ class Moderator extends React.Component {
 					{currentLine}
                     <h2>Current choices</h2>
 					{currentChoices}
-					{countdown}
                     <h2>Performance controls</h2>
 					{continueButton}
-					<Button text="Start Over" id="end" onClicked={this.handleRestartButton} />
+					<Button text="Start over" id="end" onClicked={this.handleRestartButton} />
 					<p>Once the show's over, click this button:</p>
-					<Button text="End Performance" id="end" onClicked={this.handleEndButton} />
+					<Button text="End performance" id="end" onClicked={this.handleEndButton} />
                     <h2>Current rant content</h2>
                     <ul>{r}</ul>
                     <Button text="Reset rant" onClicked={this.handleRantButton} />
 				</div>
 			);
 		} else {
-			let passwordText = <p>You'll need a password for that:</p>;
+			let passwordText = <p>Password:</p>;
 			if (this.state.attemptedPassword) {
-				passwordText = <p>Nope, that wasn't the password. Try again:</p>;
+				passwordText = <p>Wrong password. Try again:</p>;
 			}
 			return (
 				<div>
 					{passwordText}
 					<TextBox onSubmitted={this.handlePassword} />
-					<Button text="Whoops! Go back!" id="back" onClicked={this.handleBackButton} />
+					<Button text="Go back" id="back" onClicked={this.handleBackButton} />
 				</div>
 			);
 		}

@@ -6,7 +6,7 @@ export class Button extends React.Component {
 	}
 	render() {
 		return (
-			<button className={this.props.speaker} disabled={this.props.selected} onClick={this.handleClick}>{this.props.text}</button>
+			<button className={this.props.style} disabled={this.props.selected} onClick={this.handleClick}>{this.props.text}</button>
 		);
 	}
 }
@@ -36,10 +36,23 @@ export class TextBox extends React.Component {
 	}
 }
 
-export class Countdown extends React.Component {
+export class TaskBar extends React.Component {
 	render() {
 		return (
-			<div className="countdown"></div>
+			<div className="taskbar">
+				<div className="taskbar-left" aria-hidden="true">{this.props.left}</div>
+				<div className="taskbar-right" aria-hidden="true">{this.props.right}</div>
+			</div>
+		);
+	}
+}
+
+export class VideoCall extends React.Component {
+	render() {
+		return (
+			<div className="video-container">
+				<iframe className="video" title="embed" src={this.props.embedLink} frameBorder="0" referrerPolicy="strict-origin-when-cross-origin"></iframe>
+			</div>
 		);
 	}
 }

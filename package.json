@@ -1,17 +1,20 @@
 {
   "name": "intrapology",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
-  "homepage": "https://intrapology.com/hello-world",
+  "homepage": ".",
   "dependencies": {
+    "@devbookhq/splitter": "^1.4.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "axios": "^1.7.7",
     "inkjs": "^2.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.17.0",
     "react-scripts": "^5.0.0",
+    "styled-components": "^6.1.13",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -39,10 +42,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-transform-private-property-in-object": "^7.23.3",
     "firebase": "^8.6.8"
   },
-  "description": "There will be more here soon...",
+  "description": "Interaction app for Intrapology",
   "main": "index.js",
-  "author": "",
+  "author": "Squinky",
   "license": "ISC"
 }

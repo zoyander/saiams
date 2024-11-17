@@ -1,6 +1,5 @@
 import React from 'react';
 import {Button} from './Common.js'
-import names from './Names.js';
 
 class Welcome extends React.Component {
 	handleButton = (id) => {
@@ -11,7 +10,7 @@ class Welcome extends React.Component {
 		if (!this.props.performance) {
 			return (
 				<div>
-					<p tabIndex="0" role="alert">Welcome to {names.title}.</p>
+					<p tabIndex="0" role="alert">Welcome to {this.props.settings.title}.</p>
 					<Button text="Start Performance" id="moderator" onClicked={this.handleButton} />
 				</div>
 			);
@@ -22,12 +21,12 @@ class Welcome extends React.Component {
 				</div>
 			);
 		} else {
-			const callerButtons = Object.keys(names.callers).map((i) =>
-				<Button text={names.callers[i]} id={names.callers[i]} onClicked={this.handleButton} />
+			const callerButtons = Object.keys(this.props.settings.callers).map((i) =>
+				<Button text={this.props.settings.callers[i]} id={this.props.settings.callers[i]} onClicked={this.handleButton} key={i} />
 			);
 			return (
 				<div>
-					<p tabIndex="0" role="alert">Welcome to {names.title}. Please select your role from the following options:</p>
+					<p tabIndex="0" role="alert">Welcome to {this.props.settings.title}. Please select your role from the following options:</p>
                     <div id="rolepicker">
 					    <Button text="Audience" id="audience" onClicked={this.handleButton} />
 					    {callerButtons}

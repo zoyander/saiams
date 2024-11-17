@@ -4,49 +4,30 @@ import {Button, TextBox} from './Common.js';
 
 class Audience extends React.Component {
 	constructor(props) {
-    super(props);
-    this.state = {
-    	selected: null,
-		mute: "unmute"
-    };
-  }
-
+		super(props);
+		this.state = {
+			selected: null,
+			mute: "unmute"
+		};
+	}
 	handleChoice = (id) => {
 		const prev = this.state.selected
 		const updates = {};
 		if (prev) {
-  		updates[`performance/choices/${prev}/votes`] = firebase.database.ServerValue.increment(-1);
+  		updates[`/choices/${prev}/votes`] = firebase.database.ServerValue.increment(-1);
 		}
-  		updates[`performance/choices/${id}/votes`] = firebase.database.ServerValue.increment(1);
-		firebase.database().ref().update(updates);
+  		updates[`/choices/${id}/votes`] = firebase.database.ServerValue.increment(1);
+		firebase.database().ref(this.props.settings.performanceId).update(updates);
 		this.setState(state => ({
 			selected: id
 		}));
 	}
-    handleFreeResponse = (value) => {
-        var postData = value;
-        var newPostKey = firebase.database().ref().child('rants').push().key;
-        var updates = {};
-        updates['/rants/' + newPostKey] = postData;
-
-        firebase.database().ref().update(updates);
-    }
-	handleMute = (id) => {
-		this.setState(state => ({
-			mute: id
-		}))
-	}
-	playSound = (value) => {
-		if (this.state.mute == "unmute") {
-			if (value == "ping") {
-				const audioElement = new Audio("https://intrapology.com/sfx/g-bell.mp3");
-				audioElement.play();
-			}
-			if (value == "ring") {
-				const audioElement = new Audio("https://intrapology.com/sfx/ringer.mp3");
-				audioElement.play();
-			}
-		}
+	handleFreeResponse = (value) => {
+		var postData = value;
+		var newPostKey = firebase.database().ref(this.props.settings.performanceId).child('rants').push().key;
+		var updates = {};
+		updates['/rants/' + newPostKey] = postData;
+		firebase.database().ref(this.props.settings.performanceId).update(updates);
 	}
 	componentDidUpdate() {
 		if (!this.props.performance) return;
@@ -56,9 +37,6 @@ class Audience extends React.Component {
 			const choiceValues = Object.values(choices);
 			choiceValues.forEach((item) => {
 				if (item.votes) resetChoices = false;
-				if (item.text == "Hello!"){
-					this.playSound("ring");
-				}
 			});
 		}
 		if (resetChoices && this.state.selected) {
@@ -78,25 +56,6 @@ class Audience extends React.Component {
 				</div>
 			);
 		}
-
-        let newsPopup;
-        if (!this.props.news) {
-            newsPopup = "No news";
-        } else {
-            newsPopup = this.props.news
-        };
-
-		let muteCommand;
-		let buttonMessage;
-		if (this.state.mute == "unmute"){
-			muteCommand = "mute";
-			buttonMessage = "mute sfx 🔕";
-		} else {
-			muteCommand = "unmute";
-			buttonMessage = "unmute sfx 🔔"
-		}
-
-		
 		let choices = [];
 		let leading = 0;
 		const allChoices = this.props.performance.choices;
@@ -118,57 +77,39 @@ class Audience extends React.Component {
 					<Button
 						key={i}
 						text={choices[i].text+" ("+choices[i].votes+" votes)"}
-						speaker={i == leading ? "highlight" : null}
+						style={Number(i) === Number(leading) ? "highlight" : null}
 						id={i}
 						onClicked={this.handleChoice}
 						selected={this.state.selected === i} />
 				);
 				return (
 					<div>
-						<div id="soundControl" className={muteCommand} aria-live="off">
-							<Button 
-								key={muteCommand}
-								id={muteCommand}  
-								text={buttonMessage}
-								onClicked={this.handleMute} />
-						</div>
-						<ul role="status">{newsPopup}</ul>
 						<p tabIndex="0" role="alert">{newText.trim()}</p>
 						{choiceList}
 					</div>
 				);
 			} else {
+				let r = null;
+				if (this.props.performance.rants) {
+					r = Object.keys(this.props.performance.rants).map((i) =>
+						<li key={i}>{this.props.performance.rants[i]}</li>
+					);
+				}
 				return (
 					<div>
-						<div id="soundControl" className={muteCommand} aria-live="off">
-							<Button 
-								key={muteCommand}
-								id={muteCommand}   
-								text={buttonMessage}
-								onClicked={this.handleMute} />
-						</div>
-						<ul role="status">{newsPopup}</ul>
 						<div className="bubble">
-							<p tabIndex="0" role="alert" >Have your say! {newText.trim()}</p>
+							<p tabIndex="0" role="alert" >{newText.trim()}</p>
 							<TextBox onSubmitted={this.handleFreeResponse}/>
 						</div>
 						<p aria-hidden="true">Current rant content</p>
-						<ul aria-hidden="true">{this.props.rant}</ul>
+						<ul aria-hidden="true">{r}</ul>
 					</div>
 				);
 			}
 		} else {
 			return (
 				<div aria-live="off">
-					<div id="soundControl" className={muteCommand} aria-live="off">
-						<Button 
-							key={muteCommand}
-							id={muteCommand}    
-							text={buttonMessage}
-							onClicked={this.handleMute} />
-					</div>
-					<ul role="status">{newsPopup}</ul>
-					<p>You don't have to do anything right now - just sit back and enjoy the show!</p>
+					<p>{this.props.settings.defaultAudienceMessage}</p>
 				</div>
 			);
 		}

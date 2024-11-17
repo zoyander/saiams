@@ -1,28 +1,30 @@
 import firebase from './firebase.js';
-import names from './Names.js';
+import axios from 'axios';
 
 const Story = require('inkjs').Story;
-const json = require('./script.ink.json');
 
 class Script {
-	initPerformance(props) {
+	initPerformance(props, id) {
+		axios.get("/script.json").then((res) => this.setScript(res.data, id, props));
+	}
+	setScript(json, id, props) {
 		this.story = new Story(json);
 		if (!props) {
-			this.continue();
+			this.continue(id);
 		} else {
 			this.story.state.LoadJson(props.saveState);
 		}
 	}
-	continue(props = null) {
+	continue(id, props = null) {
 		let nextLines = [];
 		let audience = null;
 		let choices = null;
-        let news = null;
-		let world = null;
+		let rants = null;
 		if (props) {
 			if (props.nextLines) nextLines = props.nextLines;
 			if (props.audience) audience = props.audience;
 			if (props.choices) choices = props.choices;
+			if (props.rants) rants = props.rants;
 		} else {
 			nextLines = [];
 			while (this.story.canContinue) {
@@ -42,53 +44,40 @@ class Script {
 		let line = "";
 		while (nextLines.length > 0) {
 			line = nextLines.shift();
-            if (line.includes('News:')) {
-                news = this.getLineText(line);
-            }
-            if (line.includes('setWorldState:')) {
-                world = this.getLineText(line);
-            }
-			if (line.includes('@')) {
+            if (line.includes('@')) {
 				audience = this.getLineText(line);
 			} else {
 				break;
 			}
 		}
 		const state = this.story.state.toJson();
-		firebase.database().ref('performance').set({
+		firebase.database().ref(id).set({
 			currentLine: this.getLineText(line),
 			currentSpeaker: this.getSpeaker(line),
 			nextLines: nextLines,
 			audience: audience,
 			choices: choices,
+			rants: rants,
 			saveState: state,
 		});
-        firebase.database().ref('news').push(
-            news,
-        );
-		if (world != "") {
-        	firebase.database().ref('world').set(
-            	world,
-       	 		);
-			}
 	}
 	getLineText(text) {
 		let newText = text.replace(/\w+: /, '');
 		return newText.trim();
 	}
 	getSpeaker(text) {
-		for (const speaker of names.callers) {
-			if (text.includes(speaker+': ')) return speaker;
+		if (text.includes(": ")) {
+			return text.slice(0, text.indexOf(": "));
 		}
 		return null;
 	}
-	pickChoice(choice) {
+	pickChoice(choice, id) {
 		this.story.ChooseChoiceIndex(choice);
-		this.continue();
+		this.continue(id);
 	}
-	startOver() {
+	startOver(id) {
 		this.story.ChoosePathString("Start");
-		this.continue();
+		this.continue(id);
 	}
 }
 

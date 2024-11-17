@@ -2,32 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link 
-      rel="icon" 
-      href="%PUBLIC_URL%/favicon.ico" />
-	  <link 
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-    <meta 
-      name="viewport" 
-      content="width=device-width, initial-scale=1" />
-    <meta 
-      name="theme-color" 
-      content="#000000" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="Interaction app for Intrapology"
     />
-    <link 
-      rel="apple-touch-icon"
-      href="%PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link 
-      rel="manifest" 
-      href="%PUBLIC_URL%/manifest.json" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -39,92 +26,18 @@
     -->
     <title>Intrapology</title>
   </head>
-  <script type="text/javascript">
-    function showDiv() {
-      if (window.location.href.indexOf("background") != -1) {
-        document.getElementById("video-call-background").style.display = "block";
-        document.getElementById("root").style.display = "none";
-        document.getElementById("videocall").style.display = "none";
-        document.getElementById("subspace").style.display = "none";
-        document.getElementById("news-popup").style.display = "none";
-        document.getElementById("desktop").style.display = "none"
-      } else {
-        document.getElementById("video-call-background").style.display = "none";
-        document.getElementById("videocall").style.height = "150px";
-        document.getElementById("embedWidget").style.display = "none";
-      }
-    }
-
-    function startVideo() {
-      document.getElementById("videocall").style.height = "70vh";
-      document.getElementById("videocallmessage").style.display = "none";
-      document.getElementById("embedWidget").style.display = "block";
-    }
-    function stopVideo() {
-      document.getElementById("videocall").style.height = "150px";
-      document.getElementById("videocallmessage").style.display = "block";
-      document.getElementById("embedWidget").style.display = "none";
-
-    }
-  </script>
-  
-  <body onLoad="showDiv()">
+  <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div role="region" aria-label="interact" id="root" aria-live="polite" tabindex="1"></div>
+    <div id="root"></div>
     <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
       You can add webfonts, meta tags, or analytics to this file.
       The build step will place the bundled scripts into the <body> tag.
 
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <div id="video-call-background"></div>
-    <div id="videocall" aria-label="videocall" tabindex="0">
-      <div class="taskbar" aria-hidden="true"><span class="material-icons"><a onclick="stopVideo()">minimize</a> <a onclick="stopVideo()">close</a></span></div>
-      <div id="videocallmessage" aria-live="assertive"><button onclick="startVideo()">Click here to view the video stream</button></div>
-      <div id="embedWidget">Video embed goes here</div>
-    </div>
-
-	  <div id="desktop" class="desktop">
-      <div class="desktopbackgroundimage"></div>
-      <div class="taskbar top">
-        <div id="starticon"><a target="_blank" style="text-decoration: none;"><span class="material-icons">grid_view</span>
-          <div class="caption" tabindex="10">
-            <strong>Credits</strong>
-            <p>Created by Zoyander Street<br />
-            Software created by D. Squinkifer<br />
-            and powered by Inkle Studios's Ink<br />
-            Desktop background image by Liz Ryerson <br />
-            Ring tone: gnat-ringer2.mp3 by kevenmw | License: Creative Commons 0 <br />
-            Ping tone: Hand Bells, G, Single.wav by InspectorJ | License: Attribution 4.0 <br />
-    </p>
-          </div>
-        </a></div>
-        <div id="spacer" aria-hidden="true"></div>
-        <div id="tray" aria-hidden="true"><span class="material-icons"><span class="active"><a>feed</a></span> <a>mic</a> <a>bluetooth</a> <a>cloud</a> <a>wifi</a> <a>battery_4_bar</a></span></div>
-        <div id="time" aria-hidden="true"><a>&nbsp;02:22</a></div>
-      </div>
-    
-      <div class="material-icons" aria-hidden="true">
-        <div class="icon" id="bin">delete
-          <div class="caption">Recycle bin</div>
-        </div>
-        <div class="icon" id="folder">folder
-          <div class="caption">Dank memes</div>
-        </div>
-        <div class="icon" id="folder">folder
-          <div class="caption">Doom box</div>
-        </div>
-        <div class="icon" id="music">library_music
-          <div class="caption">Boom box</div>
-        </div>
-        <div class="icon">lock
-          <div class="caption">Passwords</div>
-        </div>
-      </div>
-    
-    </div>
-
-	  <div id="subspace" aria-hidden="true"></div>
   </body>
 </html>

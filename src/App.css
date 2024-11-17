@@ -1,93 +1,92 @@
-
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 .App {
 	text-align: center;
-	background: black;
-	font-family: Courier;
-	color: white;
+	background: var(--desktop-background);
+	font-family: var(--main-font);
+	color: var(--main-text-color);
 	font-size: 1.3em;
 }
 
-.App-container {
-	min-height: 88vh;
+.App-interact-container {
+	height: calc(100vh - 36px);
+	display: flex;
+	justify-content: center;
+}
+
+.App-interact {
+	background: var(--interact-background);
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	margin: 2em 1em;
+	justify-content: top;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
-.App-container > div {
-	width: 100%;
+.App-interact > div {
+	width: 80%;
 	max-width: 100vh;
+	margin: 2em 0;
 }
 
-.App-container > div > *:last-child {
+.App-interact > div > *:last-child {
 	margin-bottom: 0;
 }
 
-.news {
-	position: absolute;
-	background: lavender;
-	background: linear-gradient(45deg, slategray, powderblue);
-	color: black;
-	font-family: Helvetica, Arial, sans-serif;
-	text-align: left;
-	font-size: 1em;
-	font-weight: 500;
-	top: 15px;
-	padding: 1em;
-	border-radius: 0 0 0 5px;
-	box-shadow: 3px 3px 3px black;
-	animation: slide-in-fade-out 20s linear;
-	animation-fill-mode: forwards;
+.App-video-container {
+	margin: 2em;
 }
 
-li.news {
-    list-style-type: none;
-	padding-left: 2em;
+.App-subtitles {
+	background: var(--subtitles-background);
+	color: var(--subtitles-text-color);
+	font-family: Courier;
+	font-size: 1.5em;
+	position: absolute;
+	width: 100%;
+	height: 100%;
 }
 
-li.news::before{
-	content: "newspaper";
-	font-family: 'Material Icons';
+.App-subtitles-container {
 	position: absolute;
-	left: 0.5em;
+	bottom: 0;
+	left: 0;
+}
+
+.App-subtitles p {
+	padding: 20px 40px;
 }
 
 .App button {
-	font-family: Courier, 'Courier New', monospace;
 	font-size: 1em;
 	width: 100%;
+	padding: 1em;
 	margin-bottom: 0.5em;
-	border-radius: 5px;
-	/*animation: fade 30s linear;
-	animation-fill-mode: forwards;*/
+	scale: 1;
 }
 
 .App button,
 .App form input[type=submit] {
-	background-color: pink;
-	background: linear-gradient(45deg, pink, powderblue);
+	font-family: var(--main-font);
+	background: var(--main-button-background);
 	border: 0;
-	color: darkslategray;
+	border-radius: 5px;
+	color: var(--button-text-color);
 	font-weight: bold;
 }
 
-.App button:active::after,
-.App button:disabled::after,
-.App form input[type=submit]:active::after {
+.App button:disabled::after {
 	content: "✅ selected";
 	position: absolute;
 	left: -2em;
-	margin-top: -1em;
-	transform: rotate(270deg);
+	top: -1.5em;
 	font-size: small;
-	background: slateblue;
-	color: white;
-	padding: 10px;
+	background: var(--alt-highlight-background);
+	color: var(--highlight-text-color);
+	padding: 10px 15px 10px 10px;
 	border-radius: 5px;
-	width: 80px;
 }
 
 .App button:hover,
@@ -95,23 +94,22 @@ li.news::before{
 .App button:active,
 .App button:disabled,
 .App form input[type=submit]:active {
-	background-color: powderblue;
-	background: linear-gradient(90deg,powderblue, pink);
+	background: var(--main-button-background-hover);
 }
 
 .App button.highlight {
-	border: 5px palevioletred solid;
+	border: 5px var(--main-highlight-background) solid;
 }
 
 .App button.highlight::before {
 	content: "⭐ winning";
-	color: white;
+	color: var(--highlight-text-color);
 	position: absolute;
 	right: 4em;
-	margin-top: -3em;
+	top: -1.5em;
 	font-size: small;	
-	background: palevioletred;
-	padding: 0.5em;
+	background: var(--main-highlight-background);
+	padding: 10px 15px 10px 10px;
 	border-radius: 5px;
 }
 
@@ -122,7 +120,7 @@ li.news::before{
 
 .App button:hover,
 .App form input[type=submit]:hover {
-	scale: 1.1;
+	scale: 1.05;
 }
 
 .App div::not(#rolepicker)::not(#soundControl) button{
@@ -130,46 +128,20 @@ li.news::before{
 	padding: 1em;
 }
 
-#soundControl button {
-	position: absolute;
-	border: white ridge;
-	top: 0;
-	right: 10px;
-	width: 30%;
-	min-height: 30px;
-	padding: 0.5em;
-	padding: 0;
-	animation: none;
-	background: white;
-	z-index: 50;
-}
-
-#soundControl.unmute button {
-	font-size: 0.5em;
-	padding: 0;
-	padding-top: 20px;	
-}
-
-#mod button {
-	animation: none;
-}
-
 #rolepicker button{
-	background-color: darkslategray;
-	background: linear-gradient(45deg, slategray, white);
+	background: var(--alt-button-background);
 	font-size: 0.5em;
-	width: 45%;
-	min-height: 60px;
-	padding: 0.5em;
-	margin: 0.5em;
-	animation: none;
 }
 
 #rolepicker button:nth-of-type(1) {
 	font-size: 1.2em;
-	background: linear-gradient(45deg, pink, powderblue);
+	background: var(--main-button-background);
 	width: 100%;
-	margin-bottom: 25vh;
+	margin-bottom: 10vh;
+}
+
+#rolepicker button:nth-of-type(1):hover {
+	background: var(--main-button-background-hover);
 }
 
 .App form {
@@ -184,6 +156,7 @@ li.news::before{
 }
 
 .App form input[type=text] {
+	font-family: var(--main-font);
 	width: 100%;
 	flex-grow: 1;
 	border: 1px solid black;
@@ -207,43 +180,55 @@ li.news::before{
 	margin-bottom: 0.5em;
 }
 
-ul.knot .News {
-	opacity: 0.3;
+.video-container {
+	position: relative;
+	width: 100%;
+	height: 0;
+	padding-bottom: 56.25%;
 }
 
-.App .countdown {
-	height: 25px;
-	margin-bottom: 0.5em;
-	background: slategray;
-	animation: countdown 30s linear;
-	animation-iteration-count: 1;
-	animation-fill-mode: forwards;
+.video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
-@media (min-width: 800px) {
-	.news {
-		font-size: 1em;
-	}
-
-	#soundControl button {
-		font-size: 0.5em;
-		padding: 0;
-		padding-top: 20px;
-	}
+.taskbar {
+	background: var(--taskbar-background);
+	color: var(--taskbar-text-color);
+	height: 36px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	cursor: default;
+	font-size: 0.9em;
 }
 
-@keyframes countdown {
-	0% { left: 100%; width: 100%; }
-	100% { left: 0; width: 0 }
+.taskbar-left {
+	flex-grow: 1;
+	text-align: left;
+	margin: 0 12px;
 }
 
-@keyframes fade {
-	0% { opacity: 1; }
-	100% { opacity: 0.3; }
+.taskbar-right {
+	margin: 0 12px;
 }
 
-@keyframes slide-in-fade-out {
-	0% { transform: translateY(-400px); opacity: 1;}
-	5% { transform: translateY(0); opacity: 1;}
-	100% { transform: translateY(0); opacity: 0; }
+.taskbar-right div {
+	display: flex;
+	align-items: center;
+}
+
+.taskbar .active {
+	color:var(--taskbar-highlight-color);
+}
+
+.gutter {
+	height: auto !important;
+}
+
+iframe#webpack-dev-server-client-overlay {
+	display:none!important;
 }
