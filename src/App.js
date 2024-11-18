@@ -8,7 +8,6 @@ import './App.css';
 import Audience from './Audience.js';
 import VideoCaller from './VideoCaller.js';
 import Moderator from './Moderator.js';
-import Welcome from './Welcome.js';
 import Subtitles from './Subtitles.js';
 import {VideoCall, TaskBar} from './Common.js';
 
@@ -17,7 +16,6 @@ class App extends React.Component {
 		super(props);
 		this.state = {
 			settings: null,
-			role: null,
 			performance: "loading",
 			showVideoPanel: false,
 			panelSizes: [62.5, 37.5]
@@ -34,24 +32,7 @@ class App extends React.Component {
 			this.setState(state => ({
 				performance: newState
 			}));
-			if (!newState) {
-				this.handleBackButton();
-			} else if (newState === "restarting") {
-				if (this.state.role !== "moderator") {
-					this.handleBackButton();
-				}
-			}
 		});
-	}
-	handleRoleSelected = (r) => {
-		this.setState(state => ({
-			role: r
-		}));
-	}
-	handleBackButton = () => {
-		this.setState(state => ({
-			role: null
-		}));
 	}
 	handleResizeFinished = (_, newSizes) => {
 		this.setState(state => ({
@@ -71,27 +52,15 @@ class App extends React.Component {
 		this.setState = (state, callback) => {return;};
 	}
 	render() {
-		let display, interact, styles, video, subtitles;
-		let mainTaskbarLeft, mainTaskbarRight;
+		let settings, performance, styles, video, mainTaskbarLeft, mainTaskbarRight;
 		let panelSizes = this.state.panelSizes;
 		if (this.state.settings) {
+			settings = this.state.settings;
+			performance = this.state.performance;
 			styles = (<GlobalStyle styles={this.state.settings.styles} />);
-			switch(this.state.role) {
-				case "audience":
-					interact = (<Audience settings={this.state.settings} performance={this.state.performance} />);
-					break;
-				case "moderator":
-					interact = (<Moderator settings={this.state.settings} performance={this.state.performance} onBackButton={this.handleBackButton}  />);
-					break;
-				case null:
-					interact = (<Welcome settings={this.state.settings} performance={this.state.performance} onRoleSelected={this.handleRoleSelected} />);
-					break;
-				default:
-					interact = (<VideoCaller settings={this.state.settings} performance={this.state.performance} speaker={this.state.role} />);
-			}
 			mainTaskbarLeft = (<strong>{this.state.settings.title}</strong>);
-			if (this.state.showVideoPanel && this.state.role === "audience") {
-				mainTaskbarRight = (<div><span class="material-icons"><span class="active">feed</span> mic bluetooth cloud wifi battery_4_bar</span> &nbsp;2:22</div>);
+			mainTaskbarRight = (<div><span class="material-icons"><span className="active">feed</span> mic bluetooth cloud wifi battery_4_bar</span> &nbsp;2:22</div>);
+			if (this.state.showVideoPanel) {
 				video = (
 					<div className='App-video-container'>
 						<TaskBar />
@@ -102,30 +71,52 @@ class App extends React.Component {
 				panelSizes = [100];
 			}
 		}
-		display = (
+		const audience = (
 			<div className="App">
 				{styles}
 				<TaskBar left={mainTaskbarLeft} right={mainTaskbarRight} />
 				<Splitter initialSizes={panelSizes} minWidths={[640, 384]} gutterClassName="gutter" onResizeFinished={this.handleResizeFinished}>
 					{video}
-					<div className="App-interact-container">
+					<div className="App-interact-sidebar">
 						<div className="App-interact">
-							{interact}
+							<Audience settings={settings} performance={performance} />
 						</div>
 					</div>
 				</Splitter>
 			</div>
 		);
-		subtitles = (
+		const caller = (
 			<div className="App">
 				{styles}
-				<Subtitles performance={this.state.performance} />
+				<div className="App-interact-fullscreen">
+					<div className="App-interact">
+					<VideoCaller settings={settings} performance={performance} />
+					</div>
+				</div>
+			</div>
+		);
+		const moderator = (
+			<div className="App">
+				{styles}
+				<div className="App-interact-fullscreen">
+					<div className="App-interact">
+					<Moderator settings={settings} performance={performance} />
+					</div>
+				</div>
+			</div>
+		);
+		const subtitles = (
+			<div className="App">
+				{styles}
+				<Subtitles performance={performance} />
 			</div>
 		);
 		return (
 			<Router>
 				<Routes>
-					<Route exact path="/" element={display} />
+					<Route exact path="/" element={audience} />
+					<Route path="/caller" element={caller} />
+					<Route path="/moderator" element={moderator} />
 					<Route path="/subtitles" element={subtitles} />
 				</Routes>
 			</Router>

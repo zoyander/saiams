@@ -6,8 +6,7 @@ class Audience extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selected: null,
-			mute: "unmute"
+			selected: null
 		};
 	}
 	handleChoice = (id) => {
@@ -46,13 +45,10 @@ class Audience extends React.Component {
 		}
 	}
 	render() {
-		// This prevents React.js from crashing when there's a problem getting data from Firebase
-		// However, it still doesn't behave as expected - it just goes back to Welcome.js without crashing
-		// Ideally, in case of a Firebase problem we'd be able to show a specific message, like the one shown here.
 		if (!this.props.performance) {
 			return (
 				<div aria-live="off">
-					<p>Nothing to display to audience</p>
+					<p>Unable to read performance data.</p>
 				</div>
 			);
 		}

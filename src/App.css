@@ -8,14 +8,22 @@
 	font-size: 1.3em;
 }
 
-.App-interact-container {
+.App-interact-sidebar {
+	background: var(--interact-background);
 	height: calc(100vh - 36px);
 	display: flex;
 	justify-content: center;
 }
 
-.App-interact {
+.App-interact-fullscreen {
 	background: var(--interact-background);
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.App-interact {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -70,7 +78,7 @@
 .App button,
 .App form input[type=submit] {
 	font-family: var(--main-font);
-	background: var(--main-button-background);
+	background: var(--button-background);
 	border: 0;
 	border-radius: 5px;
 	color: var(--button-text-color);
@@ -94,7 +102,7 @@
 .App button:active,
 .App button:disabled,
 .App form input[type=submit]:active {
-	background: var(--main-button-background-hover);
+	background: var(--button-background-hover);
 }
 
 .App button.highlight {
@@ -126,22 +134,6 @@
 .App div::not(#rolepicker)::not(#soundControl) button{
 	min-height: 100px;
 	padding: 1em;
-}
-
-#rolepicker button{
-	background: var(--alt-button-background);
-	font-size: 0.5em;
-}
-
-#rolepicker button:nth-of-type(1) {
-	font-size: 1.2em;
-	background: var(--main-button-background);
-	width: 100%;
-	margin-bottom: 10vh;
-}
-
-#rolepicker button:nth-of-type(1):hover {
-	background: var(--main-button-background-hover);
 }
 
 .App form {

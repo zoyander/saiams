@@ -1,8 +1,29 @@
 import React from 'react';
+import {Button} from './Common.js';
 
 class VideoCaller extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			speaker: null
+		};
+	}
+	handleButton = (id) => {
+		this.setState({speaker: id});
+	}
 	render() {
-		if (!this.props.performance) return null;
+		if (!this.props.performance || !this.props.settings) return null;
+		if (!this.state.speaker) {
+			const callerButtons = Object.keys(this.props.settings.callers).map((i) =>
+				<Button text={this.props.settings.callers[i]} id={this.props.settings.callers[i]} onClicked={this.handleButton} key={i} />
+			);
+			return (
+				<div>
+					<p tabIndex="0" role="alert">Please select your role:</p>
+                    {callerButtons}
+				</div>
+			);
+		}
 		const p = this.props.performance;
 		var knot = [];
 		if (!p.nextLines) {
@@ -14,7 +35,7 @@ class VideoCaller extends React.Component {
 				<li key={index} className={"preview "+line.substring(0,4)}>{line}</li>
 			);
 		}
-		if (p.currentSpeaker === this.props.speaker && p.currentLine !== "") {
+		if (p.currentSpeaker === this.state.speaker && p.currentLine !== "") {
 			let display = null;
 			if (p.currentLine.includes("Firebase-read")) {
 				if (this.props.performance.rants) {
@@ -24,7 +45,7 @@ class VideoCaller extends React.Component {
 				}
 				return (
 					<div>
-						{this.props.speaker.toUpperCase()}:
+						{this.state.speaker.toUpperCase()}:
 						<ul>{display}</ul>
 					</div>
 				);
@@ -33,7 +54,7 @@ class VideoCaller extends React.Component {
 				return (
 					<div>
 						<div>
-							{this.props.speaker.toUpperCase()}:
+							{this.state.speaker.toUpperCase()}:
 							{display}
 						</div>
 						<div><ul className="knot">{knot}</ul></div>

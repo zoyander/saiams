@@ -25,20 +25,17 @@ class Moderator extends React.Component {
 		});
 		script.pickChoice(pickMe, this.props.settings.performanceId);
 	}
-	handleEndButton = (id) => {
-		if (this.state.areYouSure) {
-			firebase.database().ref(this.props.settings.performanceId).set(null);
-			this.props.onBackButton();
-		} else {
-			this.setState({areYouSure: true});
-		}
-	}
 	handleRantButton = (id) => {
 		firebase.database().ref(this.props.settings.performanceId+'/rants').set(null);
 	}
 	handleRestartButton = (id) => {
-		firebase.database().ref(this.props.settings.performanceId).set("restarting");
-		script.startOver(this.props.settings.performanceId);
+		if (this.state.areYouSure) {
+			firebase.database().ref(this.props.settings.performanceId).set("restarting");
+			script.startOver(this.props.settings.performanceId);
+			this.handleBackButton(id);
+		} else {
+			this.setState({areYouSure: true});
+		}
 	}
 	handlePassword = (value) => {
 		if (value === this.props.settings.modPassword) {
@@ -50,8 +47,6 @@ class Moderator extends React.Component {
 	handleBackButton = (id) => {
 		if (this.state.areYouSure) {
 			this.setState({areYouSure: false});
-		} else {
-			this.props.onBackButton();
 		}
 	}
 	truncateString(str, num) {
@@ -65,17 +60,11 @@ class Moderator extends React.Component {
 		this.setState = (state, callback) => {return;};
 	}
 	render() {
-        let r = null;
-		if (this.props.performance.rants) {
-			r = Object.keys(this.props.performance.rants).map((i) =>
-				<li key={i}>{this.props.performance.rants[i]}</li>
-			);
-		}
-		if (this.state.areYouSure) {
+        if (this.state.areYouSure) {
 			return (
 				<div>
-					<p>This will end the entire performance. Are you sure?</p>
-					<Button text="End performance" id="end" onClicked={this.handleEndButton} />
+					<p>This will restart the entire performance. Are you sure?</p>
+					<Button text="Start over" id="end" onClicked={this.handleRestartButton} />
 					<Button text="Go back" id="back" onClicked={this.handleBackButton} />
 				</div>
 			);
@@ -110,7 +99,12 @@ class Moderator extends React.Component {
 					);
 				}
 			}
-
+			let r = null;
+			if (this.props.performance.rants) {
+				r = Object.keys(this.props.performance.rants).map((i) =>
+					<li key={i}>{this.props.performance.rants[i]}</li>
+				);
+			}
 			return (
 				<div id="mod">
                     <h2>Current line</h2>
@@ -120,8 +114,6 @@ class Moderator extends React.Component {
                     <h2>Performance controls</h2>
 					{continueButton}
 					<Button text="Start over" id="end" onClicked={this.handleRestartButton} />
-					<p>Once the show's over, click this button:</p>
-					<Button text="End performance" id="end" onClicked={this.handleEndButton} />
                     <h2>Current rant content</h2>
                     <ul>{r}</ul>
                     <Button text="Reset rant" onClicked={this.handleRantButton} />
@@ -136,7 +128,6 @@ class Moderator extends React.Component {
 				<div>
 					{passwordText}
 					<TextBox onSubmitted={this.handlePassword} />
-					<Button text="Go back" id="back" onClicked={this.handleBackButton} />
 				</div>
 			);
 		}
