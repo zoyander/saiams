@@ -20,10 +20,8 @@ jobs:
       - name: Push to repository
         uses: tech-thinker/push-to-repo@v1.0.0
         env:
-          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.GIT_PAT_TOKEN }}
         with:
-          user-name: "github-actions[bot]"
-          user-email: github-actions[bot]@users.noreply.github.com
           source-directory: "./build"
           destination-github-username: "squinky"
           destination-repository-name: "intrapology-hello-world"
