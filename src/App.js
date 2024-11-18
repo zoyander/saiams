@@ -64,7 +64,7 @@ class App extends React.Component {
 		}));
 	}
 	componentDidMount() {
-		axios.get("/settings.json").then((res) => this.initSettings(res.data));
+		axios.get("./settings.json").then((res) => this.initSettings(res.data));
 		this.handleShowVideoPanel(window.innerWidth >= 1024);
 	}
 	componentWillUnmount() {
