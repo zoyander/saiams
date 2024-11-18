@@ -20,7 +20,7 @@ jobs:
       - name: Push to repository
         uses: tech-thinker/push-to-repo@v1.0.0
         env:
-          API_TOKEN_GITHUB: ${{ secrets.GIT_PAT_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.PAT_TOKEN }}
         with:
           source-directory: "./build"
           destination-github-username: "squinky"
