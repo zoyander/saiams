@@ -6,7 +6,7 @@ export class Button extends React.Component {
 	}
 	render() {
 		return (
-			<button className={this.props.style} disabled={this.props.selected} onClick={this.handleClick}>{this.props.text}</button>
+			<button className={this.props.styleClass} disabled={this.props.selected} onClick={this.handleClick}>{this.props.text}</button>
 		);
 	}
 }

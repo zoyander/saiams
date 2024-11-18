@@ -129,11 +129,7 @@
 .App button:hover,
 .App form input[type=submit]:hover {
 	scale: 1.05;
-}
-
-.App div::not(#rolepicker)::not(#soundControl) button{
-	min-height: 100px;
-	padding: 1em;
+	cursor: pointer;
 }
 
 .App form {
@@ -213,8 +209,36 @@
 	align-items: center;
 }
 
-.taskbar .active {
+.taskbar .active,
+.taskbar button:hover {
 	color:var(--taskbar-highlight-color);
+}
+
+.taskbar button {
+	background: none;
+	font-family: 'Material Icons';
+	font-size: 24px;
+	padding: 0;
+	margin: 0;
+}
+
+.taskbar button:hover {
+	background: none;
+	cursor: pointer;
+}
+
+.expander {
+	position: absolute;
+	left: 0;
+	height: calc(100vh - 36px);
+	display: flex;
+	align-items: center;
+}
+
+.expander button {
+	background: var(--taskbar-background);
+	width: auto;
+	border-radius: 0 2em 2em 0;
 }
 
 .gutter {

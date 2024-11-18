@@ -73,7 +73,7 @@ class Audience extends React.Component {
 					<Button
 						key={i}
 						text={choices[i].text+" ("+choices[i].votes+" votes)"}
-						style={Number(i) === Number(leading) ? "highlight" : null}
+						styleClass={Number(i) === Number(leading) ? "highlight" : null}
 						id={i}
 						onClicked={this.handleChoice}
 						selected={this.state.selected === i} />

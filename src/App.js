@@ -9,7 +9,7 @@ import Audience from './Audience.js';
 import VideoCaller from './VideoCaller.js';
 import Moderator from './Moderator.js';
 import Subtitles from './Subtitles.js';
-import {VideoCall, TaskBar} from './Common.js';
+import {Button, VideoCall, TaskBar} from './Common.js';
 
 class App extends React.Component {
 	constructor(props) {
@@ -52,29 +52,46 @@ class App extends React.Component {
 		this.setState = (state, callback) => {return;};
 	}
 	render() {
-		let settings, performance, styles, video, mainTaskbarLeft, mainTaskbarRight;
+		let settings, performance, styles, video, mainTaskbarLeft, mainTaskbarRight, expander;
 		let panelSizes = this.state.panelSizes;
 		if (this.state.settings) {
 			settings = this.state.settings;
 			performance = this.state.performance;
 			styles = (<GlobalStyle styles={this.state.settings.styles} />);
 			mainTaskbarLeft = (<strong>{this.state.settings.title}</strong>);
-			mainTaskbarRight = (<div><span class="material-icons"><span className="active">feed</span> mic bluetooth cloud wifi battery_4_bar</span> &nbsp;2:22</div>);
+			mainTaskbarRight = (<div><span className="material-icons"><span className="active">feed</span> mic bluetooth cloud wifi battery_4_bar</span> &nbsp;2:22</div>);
 			if (this.state.showVideoPanel) {
+				const videoTaskbarRight = (
+					<div>
+						<Button
+							text="close"
+							id={false}
+							onClicked={this.handleShowVideoPanel}
+						/>
+					</div>
+				);
 				video = (
 					<div className='App-video-container'>
-						<TaskBar />
+						<TaskBar right={videoTaskbarRight} />
 						<VideoCall embedLink={this.state.settings.videoCallEmbedLink} />
 					</div>
 				);
 			} else {
 				panelSizes = [100];
+				if (window.innerWidth >= 1024) {
+					expander = (
+						<div className='expander'>
+							<Button text=">>" id={true} onClicked={this.handleShowVideoPanel} />
+						</div>
+					);
+				}
 			}
 		}
 		const audience = (
 			<div className="App">
 				{styles}
 				<TaskBar left={mainTaskbarLeft} right={mainTaskbarRight} />
+				{expander}
 				<Splitter initialSizes={panelSizes} minWidths={[640, 384]} gutterClassName="gutter" onResizeFinished={this.handleResizeFinished}>
 					{video}
 					<div className="App-interact-sidebar">

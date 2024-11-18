@@ -81,7 +81,7 @@ class Moderator extends React.Component {
 				}
 				continueButton = (
 					// This shows when button will only advance dialogue, with no change to the script
-					<Button text="Next line" id="continue" speaker="highlight" onClicked={this.handleContinueButton} />
+					<Button text="Next line" id="continue" styleClass="highlight" onClicked={this.handleContinueButton} />
 				);
 			}
 			if (this.props.performance.choices) {
@@ -95,7 +95,7 @@ class Moderator extends React.Component {
 				if (!continueButton) {
 					continueButton = (
 						// This shows when the button will end voting and select a branch of the script
-						<Button text="Next section" id="pick" speaker="highlight" onClicked={this.handlePickButton} />
+						<Button text="Next section" id="pick" styleClass="highlight" onClicked={this.handlePickButton} />
 					);
 				}
 			}
