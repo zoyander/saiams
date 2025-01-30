@@ -249,8 +249,6 @@ iframe#webpack-dev-server-client-overlay {
 	display:none!important;
 }
 
-
-
 .submitted-text{
 	animation: bounce 1s forwards; 
 }
