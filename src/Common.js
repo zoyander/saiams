@@ -33,10 +33,10 @@ export class TextBox extends React.Component {
 	render() {
 		return (
 			<>
-			<form onSubmit={this.handleSubmit}>
-				<input type="text" value={this.state.value} onChange={this.handleChange} />
+				<form onSubmit={this.handleSubmit}>
+					<input type="text" value={this.state.value} onChange={this.handleChange} />
 					<input disabled={this.state.value.length===0} type="submit" value="Submit" />
-			</form>
+				</form>
 				<div className={this.state.submitted ?  "submitted-text" : ''}>{this.state.submitted && <>Submitted!</>}<br></br></div>
 			</>
 		);
