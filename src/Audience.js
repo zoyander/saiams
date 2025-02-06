@@ -73,7 +73,12 @@ class Audience extends React.Component {
 					<Button
 						key={i}
 						text={choices[i].text+" ("+choices[i].votes+" votes)"}
-						styleClass={Number(i) === Number(leading) ? "highlight" : null}
+						styleClass={
+							makeChoiceClassString(
+								Number(i) === Number(leading),
+								choices[i]
+							)
+						}
 						id={i}
 						onClicked={this.handleChoice}
 						selected={this.state.selected === i} />
@@ -85,17 +90,20 @@ class Audience extends React.Component {
 					</div>
 				);
 			} else {
-
 				let freeResponseBox = null;
 				if(this.props.performance.audience.startsWith('@')){
 					freeResponseBox = <><TextBox onSubmitted={this.handleFreeResponse}/></>
 				}
 
-				let r = null;
-				if (this.props.performance.rants) {
-					r = Object.keys(this.props.performance.rants).map((i) =>
-						<li key={i}>{this.props.performance.rants[i]}</li>
-					);
+				let rantContent = null;
+				if(this.props.settings.showRantContentToAudience){
+					let r = null;
+					if (this.props.performance.rants) {
+						r = Object.keys(this.props.performance.rants).map((i) =>
+							<li key={i}>{this.props.performance.rants[i]}</li>
+						);
+					}
+					rantContent = <><p aria-hidden="true">Current rant content</p><ul aria-hidden="true">{r}</ul></>
 				}
 				return (
 					<div>
@@ -103,8 +111,8 @@ class Audience extends React.Component {
 							<p tabIndex="0" role="alert" >{newText.trim()}</p>
 							{freeResponseBox}
 						</div>
-						<p aria-hidden="true">Current rant content</p>
-						<ul aria-hidden="true">{r}</ul>
+						
+						{rantContent}
 					</div>
 				);
 			}
@@ -116,6 +124,23 @@ class Audience extends React.Component {
 			);
 		}
 	}
+}
+
+const classTagPattern = /^CLASS:\s*(\S*)/;
+const leadingHighlightClass = 'highlight';
+function makeChoiceClassString(isLeadingChoice, choiceData) {
+	const maybeHighlightClass = isLeadingChoice ? leadingHighlightClass : null;
+	if (choiceData.tags) {
+		for (const tag of choiceData.tags) {
+			const maybeMatch = tag.match(classTagPattern);
+			if (maybeMatch) {
+				const className = maybeMatch[1];
+				const maybeHighlightClassStr = maybeHighlightClass ? '' : maybeHighlightClass + ' ';
+				return maybeHighlightClassStr + className;
+			}
+		}
+	}
+	return maybeHighlightClass;
 }
 
 export default Audience;

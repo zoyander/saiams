@@ -168,13 +168,6 @@
 	margin-bottom: 0.5em;
 }
 
-.video-container {
-	position: relative;
-	width: 100%;
-	height: 0;
-	padding-bottom: 56.25%;
-}
-
 .choice-list li{
 	display:flex;
 	gap:2rem;
@@ -191,6 +184,12 @@
 	margin: 0;
 }
 
+.video-container {
+	position: relative;
+	width: 100%;
+	height: 0;
+	padding-bottom: 56.25%;
+}
 
 .video {
 	position: absolute;
@@ -264,4 +263,28 @@
 
 iframe#webpack-dev-server-client-overlay {
 	display:none!important;
+}
+
+.submitted-text{
+	animation: bounce 1s forwards; 
+}
+
+@keyframes bounce {
+  0% {
+	opacity: 0;
+    transform: translateY(0); 
+  }
+  15% {
+	opacity: 1;
+    transform: translateY(-25%); 
+  }
+  30% {
+    transform: translateY(0); 
+  }
+  50% {
+	opacity: 1;
+  }
+  100% {
+	opacity: 0;
+  }
 }
