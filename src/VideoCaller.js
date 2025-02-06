@@ -37,7 +37,7 @@ class VideoCaller extends React.Component {
 		}
 		if (p.currentSpeaker === this.state.speaker && p.currentLine !== "") {
 			let display = null;
-			if (p.currentLine.includes("Firebase-read")) {
+			if (p.currentLine.includes("RANT_READ")) {
 				if (this.props.performance.rants) {
 					display = Object.keys(this.props.performance.rants).map((i) =>
 						<li key={i}>{this.props.performance.rants[i]}</li>

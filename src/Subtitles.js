@@ -5,7 +5,7 @@ class Subtitles extends React.Component {
 		let currentLine;
 		if (this.props.performance && this.props.performance.currentLine !== "") {
 			if (this.props.performance.currentSpeaker) {
-                if (this.props.performance.currentLine.includes("Firebase-read")) {
+                if (this.props.performance.currentLine.includes("RANT_READ")) {
                     currentLine = (
                         <p>{this.props.performance.currentSpeaker.toUpperCase()}: (Reads the audience-generated rant, displayed on the right)</p>
                     );

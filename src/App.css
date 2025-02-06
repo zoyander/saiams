@@ -154,6 +154,13 @@
 
 .App ol {
 	text-align: left;
+	margin-block-end: 2em;
+	padding-inline-start: 0;
+}
+
+.App ul {
+	list-style-type: none;
+	padding-inline-start: 0;
 }
 
 .App .bubble p {

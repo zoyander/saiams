@@ -52,6 +52,11 @@ class Moderator extends React.Component {
 			this.setState({areYouSure: false});
 		}
 	}
+	handleMessageBox = (value) => {
+		firebase.database().ref(this.props.settings.performanceId).update({
+			audience: value
+		});
+	}
 	truncateString(str, num) {
 		if (str.length > num) {
 			return str.slice(0, num) + "...";
@@ -113,6 +118,10 @@ class Moderator extends React.Component {
 					<li key={i}>{this.props.performance.rants[i]}</li>
 				);
 			}
+			let audienceMessage = this.props.settings.defaultAudienceMessage;
+			if (this.props.performance.audience) {
+				audienceMessage = this.props.performance.audience;
+			}
 			return (
 				<div id="mod">
 					<h2>Performance controls</h2>
@@ -122,6 +131,10 @@ class Moderator extends React.Component {
 					{currentLine}
                     <h2>Current choices</h2>
 					{currentChoices}
+
+					<h2>Current audience message</h2>
+					{audienceMessage}<p />
+					<TextBox onSubmitted={this.handleMessageBox} />
                    
                     <h2>Current rant content</h2>
                     <ul>{r}</ul>

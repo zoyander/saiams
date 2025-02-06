@@ -18,7 +18,7 @@ class Script {
 				return;
 			}
 	
-			const MAGIC_VALUE = 'Get-Random-Rant'
+			const MAGIC_VALUE = "GET_RANDOM_RANT"
 			if(val.value !== MAGIC_VALUE){
 				return
 			}
@@ -34,7 +34,7 @@ class Script {
 			while(numTries < MAX_TRIES){
 				numTries +=1;
 				const choice = allRants[Math.floor(Math.random() * allRants.length)];
-				// Prevent an infinite loop, if someone submitted Get-Random-Rant for whatever reason
+				// Prevent an infinite loop, if someone submitted GET_RANDOM_RANT for whatever reason
 				if(choice === MAGIC_VALUE){
 					continue
 				}
@@ -92,8 +92,8 @@ class Script {
 		while (nextLines.length > 0) {
 			line = nextLines.shift();
 			const speaker = this.getSpeaker(line)
-            if (line.includes('@') || speaker === 'AUDIENCE') {
-				audience = this.getLineText(line);
+            if (speaker.includes('AUDIENCE')) {
+				audience = line;
 			} else {
 				break;
 			}

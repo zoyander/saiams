@@ -66,9 +66,11 @@ class Audience extends React.Component {
 			}
 		}
 		let newText = ""
+		let textType = ""
 		if (this.props.performance.audience) {
-			newText = this.props.performance.audience.replace('@', '');
-			if (choices.length > 0) {
+			newText = this.props.performance.audience.replace(/\w+: /, '').trim();
+			textType = this.props.performance.audience.slice(0, this.props.performance.audience.indexOf(": "));
+			if (textType === "AUDIENCE_CHOICES") {
 				const choiceList = Object.keys(choices).map((i) =>
 					<Button
 						key={i}
@@ -89,11 +91,8 @@ class Audience extends React.Component {
 						{choiceList}
 					</div>
 				);
-			} else {
-				let freeResponseBox = null;
-				if(this.props.performance.audience.startsWith('@')){
-					freeResponseBox = <><TextBox onSubmitted={this.handleFreeResponse}/></>
-				}
+			} else if (textType === "AUDIENCE_RANTBOX") {
+				let freeResponseBox = <TextBox onSubmitted={this.handleFreeResponse}/>;
 
 				let rantContent = null;
 				if(this.props.settings.showRantContentToAudience){
@@ -113,6 +112,12 @@ class Audience extends React.Component {
 						</div>
 						
 						{rantContent}
+					</div>
+				);
+			} else {
+				return (
+					<div>
+						<p tabIndex="0" role="alert">{newText.trim()}</p>
 					</div>
 				);
 			}
