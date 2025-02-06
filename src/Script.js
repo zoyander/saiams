@@ -91,15 +91,14 @@ class Script {
 		let line = "";
 		while (nextLines.length > 0) {
 			line = nextLines.shift();
-            if (line.includes('@')) {
+			const speaker = this.getSpeaker(line)
+            if (line.includes('@') || speaker === 'AUDIENCE') {
 				audience = this.getLineText(line);
 			} else {
 				break;
 			}
 		}
-
 		this.rants = rants;
-
 		const state = this.story.state.toJson();
 		firebase.database().ref(id).set({
 			currentLine: this.getLineText(line),
