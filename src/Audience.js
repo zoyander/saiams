@@ -28,6 +28,9 @@ class Audience extends React.Component {
 		updates['/rants/' + newPostKey] = postData;
 		firebase.database().ref(this.props.settings.performanceId).update(updates);
 	}
+	handleExternalURL = (id) => {
+		window.open(id);
+	}
 	componentDidUpdate() {
 		if (!this.props.performance) return;
 		let resetChoices = true;
@@ -49,6 +52,21 @@ class Audience extends React.Component {
 			return (
 				<div aria-live="off">
 					<p>Unable to read performance data.</p>
+				</div>
+			);
+		}
+		if (!this.props.performance.currentLine && !this.props.performance.choices) {
+			const linkTree = Object.keys(this.props.settings.linkTree).map((i) =>
+				<Button
+						key={i}
+						text={this.props.settings.linkTree[i].text}
+						id={this.props.settings.linkTree[i].url}
+						onClicked={this.handleExternalURL} />
+			);
+			return (
+				<div aria-live="off">
+					<p>{this.props.settings.endMessage}</p>
+					{linkTree}
 				</div>
 			);
 		}

@@ -119,7 +119,9 @@ class Moderator extends React.Component {
 				);
 			}
 			let audienceMessage = this.props.settings.defaultAudienceMessage;
-			if (this.props.performance.audience) {
+			if (!this.props.performance.currentLine && !this.props.performance.choices) {
+				audienceMessage = this.props.settings.endMessage;
+			} else if (this.props.performance.audience) {
 				audienceMessage = this.props.performance.audience;
 			}
 			return (
