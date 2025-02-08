@@ -92,7 +92,7 @@ class Script {
 		while (nextLines.length > 0) {
 			line = nextLines.shift();
 			const speaker = this.getSpeaker(line)
-            if (speaker.includes('AUDIENCE')) {
+            if (speaker?.includes('AUDIENCE')) {
 				audience = line;
 			} else {
 				break;
