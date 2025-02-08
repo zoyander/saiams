@@ -14,36 +14,33 @@ class Script {
 		// Originally intended to listen to functions being called, but internal ink functions
 		// don't seem to cause this to fire.
 		this.story.variablesState.ObserveVariableChange((name,val)=>{
-			if(!this.rants){
-				return;
-			}
-	
-			const MAGIC_VALUE = "GET_RANDOM_RANT"
+
+			const MAGIC_VALUE =  "GET_RANDOM_RANT"
 			if(val.value !== MAGIC_VALUE){
 				return
 			}
 
-			const allRants = Object.values(this.rants);
-			if(!allRants.length){
-				return;
-			}
-
 			let finalChoice = null;
-			let numTries = 0;
-			const MAX_TRIES = 10
-			while(numTries < MAX_TRIES){
-				numTries +=1;
-				const choice = allRants[Math.floor(Math.random() * allRants.length)];
-				// Prevent an infinite loop, if someone submitted GET_RANDOM_RANT for whatever reason
-				if(choice === MAGIC_VALUE){
-					continue
+			if(this.rants){
+				const allRants = Object.values(this.rants);
+				if(allRants.length){
+					let numTries = 0;
+					const MAX_TRIES = 10
+					while(numTries < MAX_TRIES){
+						numTries +=1;
+						const choice = allRants[Math.floor(Math.random() * allRants.length)];
+						// Prevent an infinite loop, if someone submitted Get-Random-Rant for whatever reason
+						if(choice === MAGIC_VALUE){
+							continue
+						}
+						// This tries to ensure that each random draw is unique
+						if(this.seenChoices.has(choice)){
+							continue
+						}
+						finalChoice = choice;
+						break
+					}
 				}
-				// This tries to ensure that each random draw is unique
-				if(this.seenChoices.has(choice)){
-					continue
-				}
-				finalChoice = choice;
-				break
 			}
 
 			if(finalChoice){
