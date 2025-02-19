@@ -24,5 +24,5 @@ jobs:
         with:
           source-directory: "./build"
           destination-github-username: "squinky"
-          destination-repository-name: "intrapology-hello-world"
+          destination-repository-name: "intrinsink-hello-world"
           target-branch: main
