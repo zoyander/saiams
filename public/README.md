@@ -1,6 +1,6 @@
 # Intrinsink
 
-If you want to get set up as quickly as possible, start [here](./docs/02_getting-started-with-the-intrapology-software.md).
+If you want to get set up as quickly as possible, start [here](./docs/02_getting-started-with-intrinsink.md).
 
 - [Introduction](#introduction)
   - [Intrinsink in a Nutshell](#intrinsink-in-a-nutshell)
@@ -9,16 +9,16 @@ If you want to get set up as quickly as possible, start [here](./docs/02_getting
 - [Overview](./docs/01_overview.md)
   - [Performance Structure](./docs/01_overview.md#performance-structure)
   - [User Interface](./docs/01_overview.md#user-interface)
-- [Getting Started With Intrinsink](./docs/02_getting-started-with-the-intrapology-software.md)
-  - [Downloading the Starter Template](./docs/02_getting-started-with-the-intrapology-software.md#downloading-the-starter-template)
-  - [Basic Configuration](./docs/02_getting-started-with-the-intrapology-software.md#basic-configuration)
-  - [Testing a Performance on Your Computer](./docs/02_getting-started-with-the-intrapology-software.md#testing-a-performance-on-your-computer)
-  - [Installing Inky](./docs/02_getting-started-with-the-intrapology-software.md#installing-inky)
-- [Writing an Intrinsink/Ink script](./docs/03_writing-an-intrapologyink-script.md)
-  - [Basics](./docs/03_writing-an-intrapologyink-script.md#basics)
-  - [Interactivity](./docs/03_writing-an-intrapologyink-script.md#interactivity)
-  - [Summary](./docs/03_writing-an-intrapologyink-script.md#summary)
-  - [Next Steps](./docs/03_writing-an-intrapologyink-script.md#next-steps)
+- [Getting Started With Intrinsink](./docs/02_getting-started-with-intrinsink.md)
+  - [Downloading the Starter Template](./docs/02_getting-started-with-intrinsink.md#downloading-the-starter-template)
+  - [Basic Configuration](./docs/02_getting-started-with-intrinsink.md#basic-configuration)
+  - [Testing a Performance on Your Computer](./docs/02_getting-started-with-intrinsink.md#testing-a-performance-on-your-computer)
+  - [Installing Inky](./docs/02_getting-started-with-intrinsink.md#installing-inky)
+- [Writing an Intrinsink/Ink script](./docs/03_writing-an-intrinsink_ink-script.md)
+  - [Basics](./docs/03_writing-an-intrinsink_ink-script.md#basics)
+  - [Interactivity](./docs/03_writing-an-intrinsink_ink-script.md#interactivity)
+  - [Summary](./docs/03_writing-an-intrinsink_ink-script.md#summary)
+  - [Next Steps](./docs/03_writing-an-intrinsink_ink-script.md#next-steps)
 - [Additional Technical Topics](./docs/04_additional-technical-topics.md)
   - [Configuration (`settings.json`)](./docs/04_additional-technical-topics.md#configuration-settingsjson)
   - [Customizations to Visual Presentation (`settings.json` styles)](./docs/04_additional-technical-topics.md#customizations-to-visual-presentation-settingsjson-styles)
@@ -61,7 +61,7 @@ There are two versions of Intrinsink available to download:
 
 ### Intrinsink Hello World
 
-Intrinsink Hello World is a starter template for artists who have limited software development knowledge. If you are new to Intrinsink, it is best to start with this version. For information on how to download the Hello World template, see this section: [Downloading the Starter Template](./docs/02_getting-started-with-the-intrapology-software.md#downloading-the-starter-template).
+Intrinsink Hello World is a starter template for artists who have limited software development knowledge. If you are new to Intrinsink, it is best to start with this version. For information on how to download the Hello World template, see this section: [Downloading the Starter Template](./docs/02_getting-started-with-intrinsink.md#downloading-the-starter-template).
 
 ### Intrinsink App
 

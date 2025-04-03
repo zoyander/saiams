@@ -107,7 +107,7 @@ This is enough to use for a trial run with Intrinsink.
 
 ### Running the Performance Locally
 
-If you have not already done so, [set a unique Performance ID](./04_additional-technical-topics.md#performance-id) and [install and set up Servez](./02_getting-started-with-the-intrapology-software.md#testing-a-performance-on-your-computer) before continuing.
+If you have not already done so, [set a unique Performance ID](./04_additional-technical-topics.md#performance-id) and [install and set up Servez](./02_getting-started-with-intrinsink.md#testing-a-performance-on-your-computer) before continuing.
 
 1. First you need to ‘export’ the script to a file format that Intrinsink can use. To do so, go to the “File” menu and click the item labelled “Export to JSON…”. Name the exported file `script.json` (make sure you aren’t using the default name `script.ink.json`) and save it in your `intrinsink-hello-world` folder.
 2. Open Servez and click the “Start” button.
