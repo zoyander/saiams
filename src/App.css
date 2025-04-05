@@ -2,21 +2,39 @@
 
 .App {
 	text-align: center;
+	background: black;
+	font-family: 'Courier New', 'Courier New', Courier, monospace;
+	color: white;
+	font-size: 1.3em;
+}
+
+.App.Iris_Desktop {
 	background: var(--desktop-background);
+	background-repeat: no-repeat;
+	background-size: contain;
 	font-family: var(--main-font);
 	color: var(--main-text-color);
 	font-size: 1.3em;
 }
 
 .App-interact-sidebar {
-	background: var(--interact-background);
-	height: calc(100vh - 36px);
+	background: black;
+	height: calc(100vh - 37px);
 	display: flex;
 	justify-content: center;
+	margin-bottom: 100px;
+	margin-top: 50px;
+}
+
+.Iris_Desktop .App-interact-sidebar {
+	background: var(--interact-background);
+	background-size:cover;
+	height: calc(100vh - 100px - 50px);
+	margin-bottom: 37px;
 }
 
 .App-interact-fullscreen {
-	background: var(--interact-background);
+	background: black;
 	min-height: 100vh;
 	display: flex;
 	justify-content: center;
@@ -33,16 +51,27 @@
 	overflow-y: auto;
 }
 
+.Iris_Desktop .App-interact {
+	border: 7px solid var(--button-background);
+}
+
 .App-interact > div {
 	width: 80%;
 	max-width: 100vh;
 	margin: 2em 0;
+	color: white;
+}
+
+.Iris_Desktop .App-interact > div {
+	color: var(--highlight-text-color);
+	text-shadow: 3px 3px 3px black;
 }
 
 .App-interact > div > *:last-child {
 	margin-bottom: 0;
 }
 
+/*This is the video call display*/
 .App-video-container {
 	margin: 2em;
 }
@@ -50,7 +79,7 @@
 .App-subtitles {
 	background: var(--subtitles-background);
 	color: var(--subtitles-text-color);
-	font-family: Courier;
+	font-family: 'Courier New', Courier, monospace;
 	font-size: 1.5em;
 	position: absolute;
 	width: 100%;
@@ -77,12 +106,19 @@
 
 .App button,
 .App form input[type=submit] {
-	font-family: var(--main-font);
-	background: var(--button-background);
+	font-family: 'Courier New', Courier, monospace;
+	background: darkviolet;
 	border: 0;
 	border-radius: 5px;
-	color: var(--button-text-color);
+	color: white;
 	font-weight: bold;
+}
+
+.App.Iris_Desktop button,
+.App.Iris_Desktop form input[type=submit] {
+	font-family: var(--main-font);
+	background: var(--button-background);
+	color: var(--button-text-color);
 }
 
 .App button:disabled::after {
@@ -207,8 +243,8 @@
 }
 
 .taskbar {
-	background: var(--taskbar-background);
-	color: var(--taskbar-text-color);
+	background: darkviolet;
+	color: white;
 	height: 36px;
 	width: 100%;
 	display: flex;
@@ -217,14 +253,35 @@
 	font-size: 0.9em;
 }
 
+.Iris_Desktop .taskbar {
+	visibility: hidden;
+	background: var(--taskbar-background);
+	color: var(--taskbar-text-color);
+}
+
+.App.Iris_Desktop > .taskbar {
+	visibility: visible;
+	position: absolute;
+	bottom: 0;
+	height: 100px;
+}
+
 .taskbar-left {
 	flex-grow: 1;
 	text-align: left;
 	margin: 0 12px;
 }
 
+.App.Iris_Desktop .taskbar-left {
+	visibility: hidden;
+}
+
 .taskbar-right {
 	margin: 0 12px;
+}
+
+.App.Iris_Desktop .taskbar-right {
+	visibility: hidden;
 }
 
 .taskbar-right div {
