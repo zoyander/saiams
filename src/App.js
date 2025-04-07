@@ -62,7 +62,7 @@ class App extends React.Component {
 			mainTaskbarLeft = (<strong>{this.state.settings.title}</strong>);
 			mainTaskbarRight = (<div><span className="material-icons"><span className="active">feed</span> mic bluetooth cloud wifi battery_4_bar</span> &nbsp;2:22</div>);
 			// kludgey functionality for theme changes
-			if (this.state.performance.theme) {
+			if (this.state.performance && this.state.performance.theme) {
 				cssClass += " "+this.state.performance.theme;
 			}
 			if (this.state.showVideoPanel) {
