@@ -62,11 +62,13 @@ class Script {
 		let audience = null;
 		let choices = null;
 		let rants = null;
+		let theme = null;
 		if (props) {
 			if (props.nextLines) nextLines = props.nextLines;
 			if (props.audience) audience = props.audience;
 			if (props.choices) choices = props.choices;
 			if (props.rants) rants = props.rants;
+			if (props.theme) theme = props.theme;
 		} else {
 			nextLines = [];
 			while (this.story.canContinue) {
@@ -89,7 +91,10 @@ class Script {
 		while (nextLines.length > 0) {
 			line = nextLines.shift();
 			const speaker = this.getSpeaker(line)
-            if (speaker?.includes('AUDIENCE')) {
+			//kludgey functionality for theme changes
+			if (speaker?.includes('ENABLE_THEME')) {
+				theme = this.getLineText(line);
+            } else if (speaker?.includes('AUDIENCE')) {
 				audience = line;
 			} else {
 				break;
@@ -104,6 +109,7 @@ class Script {
 			audience: audience,
 			choices: choices,
 			rants: rants,
+			theme: theme,
 			saveState: state,
 		});
 	}

@@ -54,12 +54,17 @@ class App extends React.Component {
 	render() {
 		let settings, performance, styles, video, mainTaskbarLeft, mainTaskbarRight, expander;
 		let panelSizes = this.state.panelSizes;
+		let cssClass = "App";
 		if (this.state.settings) {
 			settings = this.state.settings;
 			performance = this.state.performance;
 			styles = (<GlobalStyle styles={this.state.settings.styles} />);
 			mainTaskbarLeft = (<strong>{this.state.settings.title}</strong>);
 			mainTaskbarRight = (<div><span className="material-icons"><span className="active">feed</span> mic bluetooth cloud wifi battery_4_bar</span> &nbsp;2:22</div>);
+			// kludgey functionality for theme changes
+			if (this.state.performance.theme) {
+				cssClass += " "+this.state.performance.theme;
+			}
 			if (this.state.showVideoPanel) {
 				const videoTaskbarRight = (
 					<div>
@@ -88,7 +93,7 @@ class App extends React.Component {
 			}
 		}
 		const audience = (
-			<div className="App">
+			<div className={cssClass}>
 				{styles}
 				<TaskBar left={mainTaskbarLeft} right={mainTaskbarRight} />
 				{expander}

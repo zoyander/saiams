@@ -6,6 +6,8 @@ VAR topic = "nothing"
 
 Apple: Hi, I'm the first video caller!
 
+ENABLE_THEME: Iris_Desktop
+
 Banana: Hi, I'm the second video caller!
 
 AUDIENCE_MESSAGE: Here is a message for the audience!
