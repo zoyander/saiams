@@ -73,7 +73,7 @@
 
 /*This is the video call display*/
 .App-video-container {
-	margin: 2em;
+	margin: 0;
 }
 
 .App-subtitles {
@@ -251,6 +251,7 @@
 	align-items: center;
 	cursor: default;
 	font-size: 0.9em;
+	border-top: 1px solid black;
 }
 
 .Iris_Desktop .taskbar {
