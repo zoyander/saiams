@@ -7,11 +7,11 @@ class Subtitles extends React.Component {
 			if (this.props.performance.currentSpeaker) {
                 if (this.props.performance.currentLine.includes("RANT_READ")) {
                     currentLine = (
-                        <p>{this.props.performance.currentSpeaker.toUpperCase()}: (Reads the audience-generated rant, displayed on the right)</p>
+                        <p className = {this.props.performance.currentSpeaker}><span className = "nameTag">{this.props.performance.currentSpeaker.toUpperCase()}:</span> (Reads the audience-generated rant, displayed on the right)</p>
                     );
 		        } else {
 				    currentLine = (
-					    <p>{this.props.performance.currentSpeaker.toUpperCase()}: {this.props.performance.currentLine}</p>
+					    <p className = {this.props.performance.currentSpeaker}><span className = "nameTag">{this.props.performance.currentSpeaker.toUpperCase()}:</span> {this.props.performance.currentLine}</p>
 				    );
                 }
 			}

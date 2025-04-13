@@ -69,7 +69,7 @@ class App extends React.Component {
 				const videoTaskbarRight = (
 					<div>
 						<Button
-							text="close"
+							text="x"
 							id={false}
 							onClicked={this.handleShowVideoPanel}
 						/>

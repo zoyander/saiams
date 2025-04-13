@@ -1,30 +1,31 @@
 {
-	"performanceId": "202504080108",
+	"performanceId": "202504131849",
 	"modPassword": "butts",
 	"title": "Intrapology",
 	"showRantContentToAudience": true,
 	"callers": [ "Hedi", "Iris", "Tea", "Paris", "Note", "CUE" ],
-	"videoCallEmbedLink": "https://www.youtube.com/embed/jlyYqZqBDRw?si=sEtyIoaQfeWz5AOr",
+	"videoCallEmbedLink": "https://www.youtube.com/embed/live_stream?channel=UCpvjr6Nj3tyrKb4HDn-8W5g",
 	"styles": {
-		"desktopBackground": "blue",
-		"interactBackground": "blue url('images/sunright.svg')",
-		"mainFont": "Courier, 'Courier New', monospace",
-		"mainTextColor": "white",
-		"taskbarBackground": "#B27632 url('/images/base.svg')",
-		"taskbarTextColor": "black",
+		"desktopBackground": "#002fa7",
+		"interactBackground": "#002fa7 url('https://intrapology.com/saiams/images/interactframe.svg')",
+		"mainFont": "'Della Respira', serif",
+		"mainTextColor": "hsl(37, 30%, 90%)",
+		"taskbarBackground": "#B27632 url('https://intrapology.com/saiams/images/base-repeat.svg')",
+		"taskbarTextColor": "hsl(37, 30%, 10%)",
 		"taskbarHighlightColor": "dodgerblue",
 		"buttonBackground": "#B27632",
 		"buttonBackgroundHover": "dodgerblue",
 		"buttonTextColor": "black",
-		"mainHighlightBackground": "indigo",
+		"mainHighlightBackground": "hsl(223, 90%, 50%)",
 		"altHighlightBackground": "midnightblue",
 		"highlightTextColor": "moccasin",
-		"subtitlesBackground": "darkslateblue",
-		"subtitlesTextColor": "white"
+		"subtitlesBackground": "hsl(37, 1%, 15%)",
+		"subtitlesTextColor": "hsl(37, 30%, 90%)"
 	},
 	"defaultAudienceMessage": "You don't have to do anything right now - just sit back and enjoy the show!",
 	"endMessage": "Thank you for playing!",
 	"linkTree": [
+		{ "text": "Support us on Patreon", "url": "https://patreon.com/intrapology" },
 		{ "text": "Intrapology website", "url": "https://intrapology.com/" },
 		{ "text": "Soft Chaos website", "url": "https://softchaos.games/" }
 	]

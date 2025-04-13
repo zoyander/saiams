@@ -1,14 +1,8 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css2?family=Della+Respira&family=Roboto+Mono:wght@100..800&display=swap');
 
 .App {
 	text-align: center;
-	background: black;
-	font-family: 'Courier New', 'Courier New', Courier, monospace;
-	color: white;
-	font-size: 1.3em;
-}
-
-.App.Iris_Desktop {
 	background: var(--desktop-background);
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -17,20 +11,32 @@
 	font-size: 1.3em;
 }
 
-.App-interact-sidebar {
+.App.Hedi_Desktop {
 	background: black;
-	height: calc(100vh - 37px);
+	font-family: 'Roboto Mono', Courier, 'Courier New', monospace;	
+	color: white;
+}
+
+.App-interact-sidebar {
+	background: var(--interact-background);
+	background-size: stretch;
+	height: calc(100vh - 100px - 50px);
+	margin-bottom: 37px;
 	display: flex;
 	justify-content: center;
-	margin-bottom: 100px;
 	margin-top: 50px;
 }
 
-.Iris_Desktop .App-interact-sidebar {
-	background: var(--interact-background);
-	background-size:cover;
-	height: calc(100vh - 100px - 50px);
-	margin-bottom: 37px;
+.Hedi_Desktop .App-interact-sidebar {
+	background: none;
+	background: black;
+	height: calc(100vh - 37px);
+	margin-bottom: 100px;
+}
+
+.App-interact-sidebar p {
+	background: black;
+	padding: 1em;
 }
 
 .App-interact-fullscreen {
@@ -77,10 +83,9 @@
 }
 
 .App-subtitles {
-	background: var(--subtitles-background);
 	color: var(--subtitles-text-color);
-	font-family: 'Courier New', Courier, monospace;
-	font-size: 1.5em;
+	font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
+	font-size: 1em;
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -94,6 +99,16 @@
 
 .App-subtitles p {
 	padding: 20px 40px;
+	background: var(--subtitles-background);
+	text-align: start;
+}
+
+.App-subtitles p.Cue {
+	font-style: italic;
+}
+
+.App-subtitles p.Cue .nameTag {
+	display:none;
 }
 
 .App button {
@@ -106,19 +121,19 @@
 
 .App button,
 .App form input[type=submit] {
-	font-family: 'Courier New', Courier, monospace;
-	background: darkviolet;
+	font-family: var(--main-font);
+	background: var(--button-background);
 	border: 0;
 	border-radius: 5px;
-	color: white;
+	color: var(--button-text-color);
 	font-weight: bold;
 }
 
-.App.Iris_Desktop button,
-.App.Iris_Desktop form input[type=submit] {
-	font-family: var(--main-font);
-	background: var(--button-background);
-	color: var(--button-text-color);
+.App.Hedi_Desktop button,
+.App.Hedi_Desktop form input[type=submit] {
+	font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
+	background: darkviolet;
+	color: white;
 }
 
 .App button:disabled::after {
@@ -232,6 +247,12 @@
 	width: 100%;
 	height: 0;
 	padding-bottom: 56.25%;
+	border-bottom: 100px solid var(--button-background);
+	z-index: 1;
+}
+
+.App.Hedi_Desktop .video-container {
+	border-bottom: none;
 }
 
 .video {
@@ -243,8 +264,9 @@
 }
 
 .taskbar {
-	background: darkviolet;
-	color: white;
+	background: var(--taskbar-background);
+	background-size: auto 100%;
+	color: var(--taskbar-text-color);
 	height: 36px;
 	width: 100%;
 	display: flex;
@@ -252,37 +274,50 @@
 	cursor: default;
 	font-size: 0.9em;
 	border-top: 1px solid black;
+	z-index: 100;
 }
 
-.Iris_Desktop .taskbar {
-	visibility: hidden;
-	background: var(--taskbar-background);
-	color: var(--taskbar-text-color);
+.Hedi_Desktop .taskbar {
+	background: darkviolet;
+	color: white;
 }
 
-.App.Iris_Desktop > .taskbar {
+.App > .taskbar {
 	visibility: visible;
 	position: absolute;
 	bottom: 0;
 	height: 100px;
 }
 
-.taskbar-left {
-	flex-grow: 1;
-	text-align: left;
-	margin: 0 12px;
+.App.Hedi_Desktop > .taskbar {
+	visibility: visible;
+	top: 0;
+	height: 36px;
 }
 
-.App.Iris_Desktop .taskbar-left {
-	visibility: hidden;
+.taskbar-left {
+	text-align: left;
+	background: var(--button-background);
+	color: var(--button-text-color);
+	width: 150px;
+	height: calc(100px-3em);
+	padding: 1em;
+	margin-top: 20px;
+}
+
+.App.Hedi_Desktop .taskbar-left {
+	background: none;
+	margin-top: 0;
+	width: 100vw;
 }
 
 .taskbar-right {
 	margin: 0 12px;
+	visibility: hidden;
 }
 
-.App.Iris_Desktop .taskbar-right {
-	visibility: hidden;
+.App.Hedi_Desktop .taskbar-right {
+	visibility: visible;
 }
 
 .taskbar-right div {
@@ -306,6 +341,11 @@
 .taskbar button:hover {
 	background: none;
 	cursor: pointer;
+}
+
+.App-video-container .taskbar {
+	background: var(--button-background) url('https://intrapology.com/saiams/images/crown.svg');
+	background-size: auto 100%;
 }
 
 .expander {
