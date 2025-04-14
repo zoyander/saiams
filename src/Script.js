@@ -62,13 +62,11 @@ class Script {
 		let audience = null;
 		let choices = null;
 		let rants = null;
-		let theme = null;
 		if (props) {
 			if (props.nextLines) nextLines = props.nextLines;
 			if (props.audience) audience = props.audience;
 			if (props.choices) choices = props.choices;
 			if (props.rants) rants = props.rants;
-			if (props.theme) theme = props.theme;
 		} else {
 			nextLines = [];
 			while (this.story.canContinue) {
@@ -93,7 +91,9 @@ class Script {
 			const speaker = this.getSpeaker(line)
 			//kludgey functionality for theme changes
 			if (speaker?.includes('ENABLE_THEME')) {
-				theme = this.getLineText(line);
+				firebase.database().ref(id).update({
+					theme: this.getLineText(line)
+				});
             } else if (speaker?.includes('AUDIENCE')) {
 				audience = line;
 			} else {
@@ -102,15 +102,14 @@ class Script {
 		}
 		this.rants = rants;
 		const state = this.story.state.toJson();
-		firebase.database().ref(id).set({
+		firebase.database().ref(id).update({
 			currentLine: this.getLineText(line),
 			currentSpeaker: this.getSpeaker(line),
 			nextLines: nextLines,
 			audience: audience,
 			choices: choices,
 			rants: rants,
-			theme: theme,
-			saveState: state,
+			saveState: state
 		});
 	}
 	getLineText(text) {
