@@ -55,10 +55,11 @@
 	justify-content: top;
 	overflow-x: hidden;
 	overflow-y: auto;
+	border: 7px solid var(--button-background);
 }
 
-.Iris_Desktop .App-interact {
-	border: 7px solid var(--button-background);
+.App-interact {
+	border: none;
 }
 
 .App-interact > div {
@@ -68,7 +69,7 @@
 	color: white;
 }
 
-.Iris_Desktop .App-interact > div {
+.App-interact > div {
 	color: var(--highlight-text-color);
 	text-shadow: 3px 3px 3px black;
 }
